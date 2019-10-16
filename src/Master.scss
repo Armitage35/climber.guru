@@ -1,6 +1,9 @@
 // External ressources
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500i,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
 
 // Main files files
 @import './variables';
 @import './App.scss';
+
+// Components
+@import './components/Button/Button.scss'
