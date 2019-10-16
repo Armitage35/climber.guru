@@ -3,7 +3,9 @@
 		<label :for="title">{{ title }}</label>
 		<div class="dropdown__content">
 			<div class="dropdown__active">
-				<span>{{ active }}</span
+				<span>
+					<i :class="icon" id="dropdown__icon" v-if="icon"></i>
+					{{ active }}</span
 				><i class="fas fa-chevron-down"></i>
 			</div>
 			<ul class="dropdown__options">
@@ -11,6 +13,7 @@
 					class="dropdown__option"
 					v-for="(option, index) in options"
 					:key="index"
+					@click="select($event)"
 				>
 					{{ option }}
 				</li>
@@ -21,11 +24,18 @@
 
 <script>
 export default {
-	props: ['title', 'options'],
+	props: ['icon', 'title', 'options'],
 	data: function() {
 		return {
 			active: this.options[0]
 		};
+	},
+	methods: {
+		select: function(event) {
+			this.active = event.target.innerHTML
+				.replace(/\n\t\t\t/g, '')
+				.replace(/\t/g, '');
+		}
 	}
 };
 </script>

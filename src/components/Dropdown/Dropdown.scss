@@ -1,3 +1,4 @@
+// Local variables
 %dropdownText {
 	color: $weird-blue;
 	font-weight: $light;
@@ -7,6 +8,7 @@
 
 $dropdownWidth: 300px;
 
+// Regular style
 label {
 	font-size: 14px;
 	font-weight: $medium;
@@ -18,6 +20,7 @@ label {
 .dropdown__content {
 	width: $dropdownWidth;
 	margin-top: 6px;
+	cursor: pointer;
 }
 
 .dropdown__active {
@@ -30,14 +33,16 @@ label {
 	justify-content: space-between;
 }
 
+#dropdown__icon {
+	margin-right: 6px;
+}
+
 .dropdown__options {
 	width: calc(#{$dropdownWidth} - 2px);
 	list-style: none;
 	position: absolute;
 	padding-left: 0;
-	padding: 6px 12px;
-	padding-left: 0px;
-	padding-right: 0px;
+	padding: 6px 0px;
 	border: solid 1px $weird-blue;
 	background-color: $plain-white;
 	border-radius: 0 0 4px 4px;

@@ -8,7 +8,11 @@
 				</div>
 			</div>
 			<div class="modal__body">
-				<Dropdown title="climbing type" :options="dropdown"></Dropdown>
+				<Dropdown
+					title="climbing type"
+					:options="dropdown"
+					icon="fas fa-map-marker-alt"
+				></Dropdown>
 			</div>
 			<div class="modal__footer">
 				<Button
