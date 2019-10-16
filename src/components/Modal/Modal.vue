@@ -20,6 +20,12 @@
 					:options="dropdown"
 					icon="far fa-calendar-alt"
 				></Dropdown>
+				<Dropdown
+					title="Climbing location"
+					type="text"
+					:options="dropdown"
+					icon="fas fa-mountain"
+				></Dropdown>
 			</div>
 			<div class="modal__footer">
 				<Button

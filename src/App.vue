@@ -3,7 +3,7 @@
 		<Modal
 			v-if="appState.modal.active"
 			@toggleModal="toggleModal"
-			title="test"
+			title="New session"
 			:actions="modalActions"
 		></Modal>
 	</div>

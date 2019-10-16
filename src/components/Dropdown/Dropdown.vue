@@ -31,16 +31,28 @@
 			</div>
 		</div>
 	</div>
-	<!-- <input type="date" name="bday" v-else /> -->
 </template>
 
 <script>
 export default {
-	props: ['type', 'icon', 'title', 'options'],
-	data: function() {
-		return {
-			active: this.options[0]
-		};
+	props: {
+		icon: {
+			type: String,
+			required: false
+		},
+		title: {
+			type: String,
+			required: true
+		},
+		options: {
+			type: Array,
+			required: false
+		},
+		type: {
+			validator: function(value) {
+				return ['text', 'date'].indexOf(value) !== -1;
+			}
+		}
 	},
 	methods: {
 		select: function(event) {
@@ -48,6 +60,11 @@ export default {
 				.replace(/\n\t\t\t/g, '')
 				.replace(/\t/g, '');
 		}
+	},
+	data: function() {
+		return {
+			active: this.options[0]
+		};
 	}
 };
 </script>
