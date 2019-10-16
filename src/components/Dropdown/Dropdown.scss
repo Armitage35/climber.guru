@@ -1,3 +1,12 @@
+%dropdownText {
+	color: $weird-blue;
+	font-weight: $light;
+	font-size: 14px;
+	text-transform: capitalize;
+}
+
+$dropdownWidth: 300px;
+
 label {
 	font-size: 14px;
 	font-weight: $medium;
@@ -6,22 +15,53 @@ label {
 	display: block;
 }
 
-select {
-	width: 300px;
+.dropdown__content {
+	width: $dropdownWidth;
 	margin-top: 6px;
-	padding: 6px 12px;
-	border-radius: 4px;
-	border: solid 1px $weird-blue;
-	background-color: $plain-white;
-	font-size: 14px;
-	font-weight: normal;
-	color: $weird-blue;
-	font-weight: $light;
-	text-transform: capitalize;
 }
 
-.option {
-	font-size: 14px;
-	font-weight: normal;
-	color: $dark-blue;
+.dropdown__active {
+	@extend %dropdownText;
+	border-radius: 4px;
+	padding: 6px 12px;
+	border: solid 1px $weird-blue;
+	background-color: $plain-white;
+	display: flex;
+	justify-content: space-between;
+}
+
+.dropdown__options {
+	width: calc(#{$dropdownWidth} - 2px);
+	list-style: none;
+	position: absolute;
+	padding-left: 0;
+	padding: 6px 12px;
+	padding-left: 0px;
+	padding-right: 0px;
+	border: solid 1px $weird-blue;
+	background-color: $plain-white;
+	border-radius: 0 0 4px 4px;
+	margin-top: 0px;
+}
+
+.dropdown__option {
+	@extend %dropdownText;
+	padding-left: 20px;
+}
+
+.dropdown__content>.dropdown__options {
+	display: none;
+}
+
+.dropdown__content:hover>.dropdown__options {
+	display: block;
+}
+
+.dropdown__content:hover>.dropdown__active {
+	border-radius: 4px 4px 0 0;
+	border-bottom: none;
+}
+
+.dropdown__content:hover>.dropdown__options>.dropdown__option:hover {
+	background: $very-light-grey;
 }
