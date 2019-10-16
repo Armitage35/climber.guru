@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import './Master.scss';
+
 export default {
 	name: 'app',
 	components: {},

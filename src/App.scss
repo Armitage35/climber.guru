@@ -1,0 +1,16 @@
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: $bodyFont;
+}
+
+p {
+	color: $black;
+	font-size: 14px;
+	font-weight: $regular;
+	line-height: 20px;
+	max-width: 70%;
+}
