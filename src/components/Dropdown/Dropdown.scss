@@ -1,0 +1,27 @@
+label {
+	font-size: 14px;
+	font-weight: $medium;
+	color: $weird-blue;
+	text-transform: capitalize;
+	display: block;
+}
+
+select {
+	width: 300px;
+	margin-top: 6px;
+	padding: 6px 12px;
+	border-radius: 4px;
+	border: solid 1px $weird-blue;
+	background-color: $plain-white;
+	font-size: 14px;
+	font-weight: normal;
+	color: $weird-blue;
+	font-weight: $light;
+	text-transform: capitalize;
+}
+
+.option {
+	font-size: 14px;
+	font-weight: normal;
+	color: $dark-blue;
+}

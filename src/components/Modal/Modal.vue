@@ -7,7 +7,9 @@
 					<i class="fas fa-times" @click="$emit('toggleModal')"></i>
 				</div>
 			</div>
-			<div class="modal__body"></div>
+			<div class="modal__body">
+				<Dropdown title="climbing type" :options="dropdown"></Dropdown>
+			</div>
 			<div class="modal__footer">
 				<Button
 					v-for="(action, index) in actions"
@@ -22,9 +24,15 @@
 
 <script>
 import Button from '../Button/Button';
+import Dropdown from '../Dropdown/Dropdown';
 
 export default {
 	props: ['title', 'actions'],
-	components: { Button }
+	components: { Button, Dropdown },
+	data: function() {
+		return {
+			dropdown: ['bouldering', 'lead', 'top rope', 'ice']
+		};
+	}
 };
 </script>

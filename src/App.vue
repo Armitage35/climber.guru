@@ -1,7 +1,5 @@
 <template>
 	<div id="app">
-		<Button type="primary" content="primary"></Button>
-		<Button type="secondary" content="secondary"></Button>
 		<Modal
 			v-if="appState.modal.active"
 			@toggleModal="toggleModal"
@@ -14,12 +12,11 @@
 <script>
 import './Master.scss';
 
-import Button from './components/Button/Button';
 import Modal from './components/Modal/Modal';
 
 export default {
 	name: 'app',
-	components: { Button, Modal },
+	components: { Modal },
 	data: function() {
 		return {
 			appState: {

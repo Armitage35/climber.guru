@@ -51,6 +51,10 @@ $modalTransition: all .6s ease;
 	}
 }
 
+.modal__body {
+	margin: 24px 34px;
+}
+
 .modal__footer {
 	display: flex;
 	background-color: $very-light-grey;
