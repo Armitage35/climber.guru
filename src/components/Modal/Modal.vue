@@ -10,8 +10,15 @@
 			<div class="modal__body">
 				<Dropdown
 					title="climbing type"
+					type="text"
 					:options="dropdown"
 					icon="fas fa-map-marker-alt"
+				></Dropdown>
+				<Dropdown
+					title="session date"
+					type="date"
+					:options="dropdown"
+					icon="far fa-calendar-alt"
 				></Dropdown>
 			</div>
 			<div class="modal__footer">

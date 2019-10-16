@@ -1,5 +1,5 @@
 <template>
-	<div class="dropdown">
+	<div class="dropdown" v-if="type === 'text'">
 		<label :for="title">{{ title }}</label>
 		<div class="dropdown__content">
 			<div class="dropdown__active">
@@ -20,11 +20,23 @@
 			</ul>
 		</div>
 	</div>
+	<div class="dropdown" v-else-if="type === 'date'">
+		<label :for="title">{{ title }}</label>
+		<div class="dropdown__content">
+			<div class="dropdown__active">
+				<span>
+					<i :class="icon" id="dropdown__icon" v-if="icon"></i>
+					<input type="date"
+				/></span>
+			</div>
+		</div>
+	</div>
+	<!-- <input type="date" name="bday" v-else /> -->
 </template>
 
 <script>
 export default {
-	props: ['icon', 'title', 'options'],
+	props: ['type', 'icon', 'title', 'options'],
 	data: function() {
 		return {
 			active: this.options[0]

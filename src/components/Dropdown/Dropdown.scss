@@ -1,5 +1,6 @@
 // Local variables
 %dropdownText {
+	font-family: $bodyFont;
 	color: $weird-blue;
 	font-weight: $light;
 	font-size: 14px;
@@ -15,6 +16,10 @@ label {
 	color: $weird-blue;
 	text-transform: capitalize;
 	display: block;
+}
+
+.dropdown {
+	margin: 24px 0;
 }
 
 .dropdown__content {
@@ -44,6 +49,7 @@ label {
 	padding-left: 0;
 	padding: 6px 0px;
 	border: solid 1px $weird-blue;
+	border-top: none;
 	background-color: $plain-white;
 	border-radius: 0 0 4px 4px;
 	margin-top: 0px;
@@ -64,9 +70,15 @@ label {
 
 .dropdown__content:hover>.dropdown__active {
 	border-radius: 4px 4px 0 0;
-	border-bottom: none;
 }
 
 .dropdown__content:hover>.dropdown__options>.dropdown__option:hover {
 	background: $very-light-grey;
+}
+
+input[type=date] {
+	@extend %dropdownText;
+	border: none;
+	text-transform: none;
+	width: 250px;
 }
