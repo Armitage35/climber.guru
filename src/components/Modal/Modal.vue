@@ -9,7 +9,12 @@
 			</div>
 			<div class="modal__body"></div>
 			<div class="modal__footer">
-				<Button v-for="(action, index) in actions" :key="index" :type="action.type" :content="action.title"></Button>
+				<Button
+					v-for="(action, index) in actions"
+					:key="index"
+					:type="action.type"
+					:content="action.title"
+				></Button>
 			</div>
 		</div>
 	</div>

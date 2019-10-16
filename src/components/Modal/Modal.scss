@@ -53,8 +53,8 @@ $modalTransition: all .6s ease;
 
 .modal__footer {
 	display: flex;
+	background-color: $very-light-grey;
 	justify-content: flex-end;
 	border-top: solid 1px $dark-blue;
-	background-color: $very-light-grey;
 	padding: 12px 24px;
 }
