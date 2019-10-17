@@ -1,5 +1,7 @@
 <template>
-	<button type="button" :class="classResolver">{{ content }}</button>
+	<button type="button" :class="classResolver" @click="$emit(eventName)">
+		{{ content }}
+	</button>
 </template>
 
 <script>
@@ -12,6 +14,10 @@ export default {
 			required: true
 		},
 		content: {
+			type: String,
+			required: true
+		},
+		eventName: {
 			type: String,
 			required: true
 		}
