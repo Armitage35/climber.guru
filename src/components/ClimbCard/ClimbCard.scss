@@ -8,15 +8,18 @@
 .climbCard__icon {
 	display: flex;
 	margin: auto;
-	justify-content: space-evenly;
+	justify-content: center;
 	border-radius: 100%;
 	width: 60px;
 	height: 60px;
 	background-color: $orange;
 
 	i {
+		display: flex;
+		justify-content: center;
+		align-self: center;
 		color: white;
-		width: 24px;
+		width: 36px;
 	}
 }
 
@@ -49,4 +52,8 @@
 	font-size: 14px;
 	color: $dark-blue;
 	padding: 0 12px 0 0;
+
+	input {
+		margin: 6px;
+	}
 }
