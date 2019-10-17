@@ -86,7 +86,7 @@
 
 .climbCard__icon--trash {
 	@extend %cardAction;
-	border-radius: 0 0 4px 0;
+	border-radius: 0 0 4px;
 	border-left: solid 1px $darker-shade-of-grey;
 }
 
