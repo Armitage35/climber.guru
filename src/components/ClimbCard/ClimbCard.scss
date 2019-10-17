@@ -1,18 +1,15 @@
-.climbCard {
-	border-radius: 4px;
-	width: 250px;
-	border: solid 1px $darker-shade-of-grey;
-	padding-top: 14px;
+// Local variables
+@mixin transform($lineType) {
+	border: $lineType 1px $darker-shade-of-grey;
 }
 
-.climbCard__icon {
+%icon {
 	display: flex;
 	margin: auto;
 	justify-content: center;
 	border-radius: 100%;
 	width: 60px;
 	height: 60px;
-	background-color: $orange;
 
 	i {
 		display: flex;
@@ -21,6 +18,43 @@
 		color: white;
 		width: 36px;
 	}
+}
+
+%climbCard {
+	border-radius: 4px;
+	width: 250px;
+	padding-top: 14px;
+	margin-right: 24px;
+	transition: ease 0.5s;
+}
+
+%climbCard:hover {
+	box-shadow: $defaultShadow;
+}
+
+// Hard styles
+.climbCard {
+	@extend %climbCard;
+	@include transform(solid);
+}
+
+.climbCard--new {
+	@extend %climbCard;
+	@include transform(dashed);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.climbCard__icon {
+	@extend %icon;
+	background-color: $orange;
+}
+
+.climbCard__icon--new {
+	@extend %icon;
+	background-color: $dark-blue;
 }
 
 .climbCard__dropdowns {
@@ -56,4 +90,12 @@
 	input {
 		margin: 6px;
 	}
+}
+
+.climbCard__label {
+	margin: auto;
+	text-align: center;
+	margin-top: 10px;
+	color: $dark-blue;
+	font-size: 14px;
 }

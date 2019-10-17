@@ -63,7 +63,7 @@ export default {
 	},
 	data: function() {
 		return {
-			active: this.options[0]
+			active: this.options ? this.options[0] : null
 		};
 	}
 };

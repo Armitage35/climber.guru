@@ -4,7 +4,6 @@
 			v-if="appState.modal.active"
 			@toggleModal="toggleModal"
 			title="New session"
-			:actions="modalActions"
 		></Modal>
 	</div>
 </template>

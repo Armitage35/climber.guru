@@ -12,7 +12,6 @@
 					title="session date"
 					type="date"
 					icon="far fa-calendar-alt"
-					:options="dropdown"
 				></Dropdown>
 				<Dropdown
 					title="Climbing location"
@@ -23,7 +22,8 @@
 			</div>
 			<label>What did you climb today?</label>
 			<div class="newSession_climbs">
-				<ClimbCard></ClimbCard>
+				<ClimbCard :content="true"></ClimbCard>
+				<ClimbCard :content="false"></ClimbCard>
 			</div>
 		</div>
 		<div class="modal__footer">

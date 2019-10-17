@@ -9,15 +9,12 @@
 	text-transform: capitalize;
 }
 
-$dropdownWidth: 300px;
-
 // Regular style
 .dropdown {
 	margin: 24px 0;
 }
 
 .dropdown__content {
-	width: $dropdownWidth;
 	margin-top: 6px;
 	cursor: pointer;
 }
@@ -39,7 +36,6 @@ $dropdownWidth: 300px;
 .dropdown__options {
 	z-index: 1;
 	position: relative;
-	width: calc(#{$dropdownWidth} - 2px);
 	border: solid 1px $weird-blue;
 	border-radius: 0 0 4px 4px;
 	background-color: $plain-white;

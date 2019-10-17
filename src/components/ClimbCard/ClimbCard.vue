@@ -1,5 +1,5 @@
 <template>
-	<div class="climbCard">
+	<div v-if="content" class="climbCard">
 		<div class="climbCard__icon">
 			<i class="fas fa-fill"></i>
 		</div>
@@ -27,6 +27,14 @@
 			</div>
 		</div>
 	</div>
+	<div v-else class="climbCard--new">
+		<div class="climbCard__addClimb">
+			<div class="climbCard__icon--new">
+				<i class="fas fa-plus-circle"></i>
+			</div>
+			<div class="climbCard__label">Add a climb</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -35,6 +43,12 @@ import TextInput from '../TextInput/TextInput';
 
 export default {
 	components: { Dropdown, TextInput },
+	props: {
+		content: {
+			type: Boolean,
+			required: true
+		}
+	},
 	data: function() {
 		return {
 			climbPerformance: ['Onsight', 'Flash', 'Redpoint', 'Repeat'],
