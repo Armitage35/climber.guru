@@ -23,13 +23,7 @@ export default {
 				modal: {
 					active: true
 				}
-			},
-			modalActions: [
-				{
-					title: 'save',
-					type: 'primary'
-				}
-			]
+			}
 		};
 	},
 	methods: {
