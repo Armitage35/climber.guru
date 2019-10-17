@@ -6,13 +6,17 @@
 		<div class="climbCard__dropdowns">
 			<Dropdown
 				title="climbing type"
+				name="climbType"
 				type="text"
 				:options="climbPerformance"
+				:preset="climb.type"
 			></Dropdown>
 			<Dropdown
 				title="climbing type"
+				name="climbGrade"
 				type="text"
 				:options="boulderLevels"
+				:preset="climb.grade"
 			></Dropdown>
 		</div>
 		<div class="climbCard__footer">
@@ -47,6 +51,10 @@ export default {
 		content: {
 			type: Boolean,
 			required: true
+		},
+		climb: {
+			type: Object,
+			required: false
 		}
 	},
 	data: function() {

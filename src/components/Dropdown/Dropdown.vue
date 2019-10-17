@@ -1,11 +1,11 @@
 <template>
-	<div class="dropdown" v-if="type === 'text'">
+	<div class="dropdown" :id="name" v-if="type === 'text'">
 		<label :for="title">{{ title }}</label>
 		<div class="dropdown__content">
 			<div class="dropdown__active">
 				<span>
 					<i :class="icon" id="dropdown__icon" v-if="icon"></i>
-					{{ active }}</span
+					{{ valueResolver }}</span
 				><i class="fas fa-chevron-down"></i>
 			</div>
 			<ul class="dropdown__options">
@@ -36,6 +36,10 @@
 <script>
 export default {
 	props: {
+		name: {
+			type: String,
+			required: true
+		},
 		icon: {
 			type: String,
 			required: false
@@ -48,23 +52,48 @@ export default {
 			type: Array,
 			required: false
 		},
+		preset: {
+			type: String,
+			required: false
+		},
 		type: {
 			validator: function(value) {
 				return ['text', 'date'].indexOf(value) !== -1;
 			}
 		}
 	},
-	methods: {
-		select: function(event) {
-			this.active = event.target.innerHTML
-				.replace(/\n\t\t\t/g, '')
-				.replace(/\t/g, '');
-		}
-	},
 	data: function() {
 		return {
-			active: this.options ? this.options[0] : null
+			currentValue: '',
+			componentPreset: this.presetResolver,
+			hasBeenUpdated: false
 		};
+	},
+	methods: {
+		select: function(event) {
+			this.currentValue = event.target.innerHTML
+				.replace(/\n\t\t\t/g, '')
+				.replace(/\t/g, '');
+
+			this.hasBeenUpdated = true;
+			this.$emit('valueChanged', [this.name, this.valueResolver]);
+		}
+	},
+	computed: {
+		presetResolver: function() {
+			if (this.preset) {
+				return this.preset;
+			} else if (this.options) {
+				return this.options[0];
+			} else {
+				return null;
+			}
+		},
+		valueResolver: function() {
+			return this.hasBeenUpdated
+				? this.currentValue
+				: this.presetResolver;
+		}
 	}
 };
 </script>
