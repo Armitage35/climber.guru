@@ -10,6 +10,7 @@
 
 <script>
 import './Master.scss';
+import 'izitoast/dist/css/iziToast.min.css';
 
 import Modal from './components/Modal/Modal';
 

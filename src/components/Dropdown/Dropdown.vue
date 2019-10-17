@@ -26,7 +26,7 @@
 			<div class="dropdown__active">
 				<span>
 					<i :class="icon" id="dropdown__icon" v-if="icon"></i>
-					<input type="date"
+					<input type="date" :id="name"
 				/></span>
 			</div>
 		</div>

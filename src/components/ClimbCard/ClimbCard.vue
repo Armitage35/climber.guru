@@ -29,6 +29,7 @@
 				<TextInput
 					name="routeName"
 					placeholder="Route name"
+					@newContent="routeName = $event"
 				></TextInput>
 			</div>
 			<div
@@ -71,7 +72,7 @@ export default {
 	data: function() {
 		return {
 			climbPerformance: ['Onsight', 'Flash', 'Redpoint', 'Repeat'],
-			level: []
+			routeName: ''
 		};
 	},
 	computed: {
@@ -123,6 +124,11 @@ export default {
 				default:
 					return '--green';
 			}
+		}
+	},
+	watch: {
+		routeName: function() {
+			this.$emit('routeNameUpdated', [this.climbID, this.routeName]);
 		}
 	}
 };

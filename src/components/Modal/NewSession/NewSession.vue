@@ -36,6 +36,7 @@
 					:climbID="index"
 					:climb="climb"
 					@removeClimb="climbs.splice($event, 1)"
+					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
 				></ClimbCard>
 				<ClimbCard
 					:content="false"
@@ -54,6 +55,7 @@
 				:key="index"
 				:type="action.type"
 				:content="action.title"
+				@click="saveClimb()"
 			></Button>
 		</div>
 	</div>
@@ -63,6 +65,8 @@
 import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
 import ClimbCard from '../../ClimbCard/ClimbCard';
+
+import iziToast from 'izitoast';
 
 export default {
 	components: { Button, ClimbCard, Dropdown },
@@ -87,6 +91,16 @@ export default {
 				}
 			]
 		};
+	},
+	methods: {
+		saveClimb: function() {
+			this.session.date = document.getElementById('sessionDate').value;
+			iziToast.success({
+				title: 'Session saved',
+				message: "You did amazing today! I'm really proud of you",
+				position: 'topRight'
+			});
+		}
 	}
 };
 </script>

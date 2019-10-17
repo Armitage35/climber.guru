@@ -1,5 +1,10 @@
 <template>
-	<input type="text" :name="name" :placeholder="placeholder" />
+	<input
+		type="text"
+		:name="name"
+		:placeholder="placeholder"
+		v-model="content"
+	/>
 </template>
 
 <script>
@@ -12,6 +17,16 @@ export default {
 		placeholder: {
 			type: String,
 			required: false
+		}
+	},
+	data: function() {
+		return {
+			content: ''
+		};
+	},
+	watch: {
+		content: function() {
+			this.$emit('newContent', this.content);
 		}
 	}
 };
