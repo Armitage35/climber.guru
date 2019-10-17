@@ -31,6 +31,12 @@
 					placeholder="Route name"
 				></TextInput>
 			</div>
+			<div
+				class="climbCard__icon--trash"
+				@click="$emit('removeClimb', climbID)"
+			>
+				<i class="fas fa-trash"></i>
+			</div>
 		</div>
 	</div>
 	<div v-else class="climbCard--new" @click="$emit('addClimb')">
@@ -57,6 +63,9 @@ export default {
 		climb: {
 			type: Object,
 			required: false
+		},
+		climbID: {
+			type: Number
 		}
 	},
 	data: function() {

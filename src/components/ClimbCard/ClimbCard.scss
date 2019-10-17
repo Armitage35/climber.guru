@@ -32,6 +32,19 @@
 	box-shadow: $defaultShadow;
 }
 
+%cardAction {
+	display: flex;
+	width: 50px;
+	height: 35px;
+	border-top: solid 1px $darker-shade-of-grey;
+	cursor: pointer;
+
+	i {
+		margin: auto;
+		color: $dark-blue;
+	}
+}
+
 // Hard styles
 .climbCard {
 	@extend %climbCard;
@@ -66,21 +79,19 @@
 }
 
 .climbingCard__picture {
-	display: flex;
-	width: 50px;
-	height: 35px;
+	@extend %cardAction;
 	border-radius: 0 0 0 4px;
 	border-right: solid 1px $darker-shade-of-grey;
-	border-top: solid 1px $darker-shade-of-grey;
+}
 
-	i {
-		margin: auto;
-		color: $dark-blue;
-	}
+.climbCard__icon--trash {
+	@extend %cardAction;
+	border-radius: 0 0 4px 0;
+	border-left: solid 1px $darker-shade-of-grey;
 }
 
 .climbingCard__routeName {
-	width: 200px;
+	width: 150px;
 	height: 35px;
 	color: $dark-blue;
 	border-top: solid 1px $darker-shade-of-grey;
@@ -89,6 +100,7 @@
 
 	input {
 		margin: 6px;
+		max-width: 150px;
 	}
 }
 

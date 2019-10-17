@@ -7,7 +7,9 @@
 					type="text"
 					name="sessionType"
 					:options="climbTypes"
+					:preset="session.type"
 					icon="fas fa-map-marker-alt"
+					@valueChanged="session.type = $event[1]"
 				></Dropdown>
 				<Dropdown
 					title="session date"
@@ -21,15 +23,19 @@
 					name="sessionLocation"
 					icon="fas fa-mountain"
 					:options="climbGym"
+					:preset="session.location"
+					@valueChanged="session.location = $event[1]"
 				></Dropdown>
 			</div>
 			<label>What did you climb today?</label>
 			<div class="newSession_climbs">
 				<ClimbCard
-					:content="true"
 					v-for="(climb, index) in climbs"
+					:content="true"
 					:key="index"
+					:climbID="index"
 					:climb="climb"
+					@removeClimb="climbs.splice($event, 1)"
 				></ClimbCard>
 				<ClimbCard
 					:content="false"
@@ -65,6 +71,11 @@ export default {
 		return {
 			climbTypes: ['bouldering', 'lead', 'top rope', 'ice'],
 			climbGym: ['Bloc shop', 'Zero gravite', 'Allez Up!'],
+			session: {
+				date: '',
+				type: 'Bouldering',
+				location: 'Bloc Shop'
+			},
 			climbs: [
 				{
 					type: 'Redpoint',
