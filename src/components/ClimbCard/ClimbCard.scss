@@ -1,0 +1,16 @@
+.climbCard {
+	display: flex;
+	border-radius: 4px;
+	width: 250px;
+	border: solid 1px $darker-shade-of-grey;
+	justify-content: space-evenly;
+}
+
+.climbCard__icon {
+	display: flex;
+	justify-content: space-evenly;
+	border-radius: 100%;
+	width: 60px;
+	height: 60px;
+	background-color: $orange;
+}
