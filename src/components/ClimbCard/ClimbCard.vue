@@ -1,7 +1,7 @@
 <template>
 	<div v-if="content" class="climbCard">
 		<div class="climbCard__icon">
-			<i class="fas fa-fill"></i>
+			<i :class="iconResolver"></i>
 		</div>
 		<div class="climbCard__dropdowns">
 			<Dropdown
@@ -10,6 +10,7 @@
 				type="text"
 				:options="climbPerformance"
 				:preset="climb.type"
+				@valueChanged="climb.type = $event[1].replace(/\s/g, '')"
 			></Dropdown>
 			<Dropdown
 				title="climbing type"
@@ -17,6 +18,7 @@
 				type="text"
 				:options="boulderLevels"
 				:preset="climb.grade"
+				@valueChanged="climb.grade = $event[1].replace(/\s/g, '')"
 			></Dropdown>
 		</div>
 		<div class="climbCard__footer">
@@ -70,6 +72,20 @@ export default {
 				boulderLevel.push('V' + i);
 			}
 			return boulderLevel;
+		},
+		iconResolver: function() {
+			switch (this.climb.type) {
+				case 'Onsight':
+					return 'far fa-eye';
+				case 'Flash':
+					return 'fas fa-bolt';
+				case 'Redpoint':
+					return 'fas fa-fill';
+				case 'Repeat':
+					return 'fas fa-redo';
+				default:
+					return 'fas fa-mountain';
+			}
 		}
 	}
 };
