@@ -4,21 +4,22 @@
 			<Dropdown
 				title="climbing type"
 				type="text"
-				:options="dropdown"
+				:options="climbTypes"
 				icon="fas fa-map-marker-alt"
 			></Dropdown>
 			<Dropdown
 				title="session date"
 				type="date"
-				:options="dropdown"
 				icon="far fa-calendar-alt"
+				:options="dropdown"
 			></Dropdown>
 			<Dropdown
 				title="Climbing location"
 				type="text"
-				:options="dropdown"
 				icon="fas fa-mountain"
+				:options="climbGym"
 			></Dropdown>
+			<label>What did you climb today?</label>
 		</div>
 		<div class="modal__footer">
 			<Button
@@ -39,7 +40,8 @@ export default {
 	props: ['actions'],
 	data: function() {
 		return {
-			dropdown: ['bouldering', 'lead', 'top rope', 'ice']
+			climbTypes: ['bouldering', 'lead', 'top rope', 'ice'],
+			climbGym: ['Bloc shop', 'Zero gravite', 'Allez Up!']
 		};
 	}
 };
