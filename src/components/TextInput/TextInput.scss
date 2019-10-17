@@ -1,14 +1,14 @@
 input[type=text] {
 	border: none;
+	color: $dark-blue;
 	font-family: $bodyFont;
 	font-size: 14px;
 	font-weight: $regular;
-	color: $dark-blue;
 }
 
 input[type=text]::placeholder {
+	color: $dark-blue;
 	font-family: $bodyFont;
 	font-size: 14px;
 	font-weight: $regular;
-	color: $dark-blue;
 }

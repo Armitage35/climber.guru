@@ -5,24 +5,24 @@
 
 %icon {
 	display: flex;
-	margin: auto;
-	justify-content: center;
-	border-radius: 100%;
 	width: 60px;
 	height: 60px;
+	margin: auto;
+	border-radius: 100%;
+	justify-content: center;
 
 	i {
 		display: flex;
+		width: 36px;
+		color: $plain-white;
 		justify-content: center;
 		align-self: center;
-		color: white;
-		width: 36px;
 	}
 }
 
 %climbCard {
-	border-radius: 4px;
 	width: 250px;
+	border-radius: 4px;
 	padding-top: 14px;
 	margin-right: 24px;
 	transition: ease 0.5s;
@@ -66,12 +66,12 @@
 }
 
 .climbingCard__picture {
+	display: flex;
 	width: 50px;
 	height: 35px;
+	border-radius: 0 0 0 4px;
 	border-right: solid 1px $darker-shade-of-grey;
 	border-top: solid 1px $darker-shade-of-grey;
-	border-radius: 0 0 0 4px;
-	display: flex;
 
 	i {
 		margin: auto;
@@ -80,11 +80,11 @@
 }
 
 .climbingCard__routeName {
-	height: 35px;
-	border-top: solid 1px $darker-shade-of-grey;
 	width: 200px;
-	font-size: 14px;
+	height: 35px;
 	color: $dark-blue;
+	border-top: solid 1px $darker-shade-of-grey;
+	font-size: 14px;
 	padding: 0 12px 0 0;
 
 	input {
@@ -94,8 +94,8 @@
 
 .climbCard__label {
 	margin: auto;
+	color: $dark-blue;
 	text-align: center;
 	margin-top: 10px;
-	color: $dark-blue;
 	font-size: 14px;
 }
