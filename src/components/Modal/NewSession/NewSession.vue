@@ -31,7 +31,15 @@
 					:key="index"
 					:climb="climb"
 				></ClimbCard>
-				<ClimbCard :content="false"></ClimbCard>
+				<ClimbCard
+					:content="false"
+					@addClimb="
+						climbs.push({
+							type: 'Redpoint',
+							grade: 'V5'
+						})
+					"
+				></ClimbCard>
 			</div>
 		</div>
 		<div class="modal__footer">

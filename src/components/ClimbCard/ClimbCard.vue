@@ -33,7 +33,7 @@
 			</div>
 		</div>
 	</div>
-	<div v-else class="climbCard--new">
+	<div v-else class="climbCard--new" @click="$emit('addClimb')">
 		<div class="climbCard__addClimb">
 			<div class="climbCard__icon--new">
 				<i class="fas fa-plus-circle"></i>
