@@ -1,6 +1,6 @@
 <template>
 	<div v-if="content" class="climbCard">
-		<div class="climbCard__icon">
+		<div :class="'climbCard__icon' + colourResolver">
 			<i :class="iconResolver"></i>
 		</div>
 		<div class="climbCard__dropdowns">
@@ -94,6 +94,34 @@ export default {
 					return 'fas fa-redo';
 				default:
 					return 'fas fa-mountain';
+			}
+		},
+		colourResolver: function() {
+			switch (this.climb.grade) {
+				case 'V0':
+				case 'V1':
+					return '--green';
+				case 'V2':
+				case 'V3':
+					return '--blue';
+				case 'V4':
+				case 'V5':
+					return '--purple';
+				case 'V6':
+				case 'V7':
+					return '--orange';
+				case 'V8':
+				case 'V9':
+					return '--red';
+				case 'V10':
+				case 'V11':
+				case 'V12':
+				case 'V13':
+				case 'V14':
+				case 'V15':
+					return '--black';
+				default:
+					return '--green';
 			}
 		}
 	}
