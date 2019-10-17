@@ -1,0 +1,33 @@
+// Local variables
+%button {
+	position: relative;
+	top: 0;
+	border: solid 1px $weird-blue;
+	border-radius: 4px;
+	font-family: $bodyFont;
+	font-size: 14px;
+	font-weight: $semiBold;
+	padding: 6px 12px;
+	text-transform: capitalize;
+	text-align: center;
+	cursor: pointer;
+	transition: top ease 0.5s;
+}
+
+%button:hover {
+	top: -2px;
+	box-shadow: $defaultShadow;
+}
+
+// Hard style
+.bttn__primary {
+	@extend %button;
+	color: $plain-white;
+	background-color: $dark-blue;
+}
+
+.bttn__secondary {
+	@extend %button;
+	color: $weird-blue;
+	background-color: $plain-white;
+}

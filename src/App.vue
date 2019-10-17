@@ -1,28 +1,41 @@
 <template>
 	<div id="app">
-		<img alt="Vue logo" src="./assets/logo.png">
-		<HelloWorld msg="Welcome to Your Vue.js App"/>
+		<Modal
+			v-if="appState.modal.active"
+			@toggleModal="toggleModal"
+			title="New session"
+			:actions="modalActions"
+		></Modal>
 	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import './Master.scss';
+
+import Modal from './components/Modal/Modal';
 
 export default {
 	name: 'app',
-	components: {
-		HelloWorld
+	components: { Modal },
+	data: function() {
+		return {
+			appState: {
+				modal: {
+					active: true
+				}
+			},
+			modalActions: [
+				{
+					title: 'save',
+					type: 'primary'
+				}
+			]
+		};
+	},
+	methods: {
+		toggleModal: function() {
+			this.appState.modal.active = !this.appState.modal.active;
+		}
 	}
-}
+};
 </script>
-
-<style>
-#app {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-</style>

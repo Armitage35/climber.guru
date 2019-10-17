@@ -1,0 +1,87 @@
+// sass-lint:disable no-ids
+
+// Local variables
+%dropdownText {
+	color: $weird-blue;
+	font-family: $bodyFont;
+	font-weight: $light;
+	font-size: 14px;
+	text-transform: capitalize;
+}
+
+$dropdownWidth: 300px;
+
+// Regular style
+label {
+	display: block;
+	color: $weird-blue;
+	font-size: 14px;
+	font-weight: $medium;
+	text-transform: capitalize;
+}
+
+.dropdown {
+	margin: 24px 0;
+}
+
+.dropdown__content {
+	width: $dropdownWidth;
+	margin-top: 6px;
+	cursor: pointer;
+}
+
+.dropdown__active {
+	@extend %dropdownText;
+	display: flex;
+	border: solid 1px $weird-blue;
+	border-radius: 4px;
+	background-color: $plain-white;
+	padding: 6px 12px;
+	justify-content: space-between;
+}
+
+#dropdown__icon {
+	margin-right: 6px;
+}
+
+.dropdown__options {
+	z-index: 1;
+	position: absolute;
+	width: calc(#{$dropdownWidth} - 2px);
+	border: solid 1px $weird-blue;
+	border-radius: 0 0 4px 4px;
+	background-color: $plain-white;
+	list-style: none;
+	padding-left: 0;
+	padding: 6px 0px;
+	border-top: none;
+	margin-top: 0px;
+}
+
+.dropdown__option {
+	@extend %dropdownText;
+	padding-left: 20px;
+}
+
+.dropdown__content>.dropdown__options {
+	display: none;
+}
+
+.dropdown__content:hover>.dropdown__options {
+	display: block;
+}
+
+.dropdown__content:hover>.dropdown__active {
+	border-radius: 4px 4px 0 0;
+}
+
+.dropdown__content:hover>.dropdown__options>.dropdown__option:hover {
+	background: $very-light-grey;
+}
+
+input[type=date] {
+	@extend %dropdownText;
+	width: 250px;
+	border: none;
+	text-transform: none;
+}
