@@ -1,0 +1,14 @@
+input[type=text] {
+	border: none;
+	font-family: $bodyFont;
+	font-size: 14px;
+	font-weight: $regular;
+	color: $dark-blue;
+}
+
+input[type=text]::placeholder {
+	font-family: $bodyFont;
+	font-size: 14px;
+	font-weight: $regular;
+	color: $dark-blue;
+}

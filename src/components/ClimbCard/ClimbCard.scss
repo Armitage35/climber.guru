@@ -1,16 +1,52 @@
 .climbCard {
-	display: flex;
 	border-radius: 4px;
 	width: 250px;
 	border: solid 1px $darker-shade-of-grey;
-	justify-content: space-evenly;
+	padding-top: 14px;
 }
 
 .climbCard__icon {
 	display: flex;
+	margin: auto;
 	justify-content: space-evenly;
 	border-radius: 100%;
 	width: 60px;
 	height: 60px;
 	background-color: $orange;
+
+	i {
+		color: white;
+		width: 24px;
+	}
+}
+
+.climbCard__dropdowns {
+	padding: 14px;
+}
+
+.climbCard__footer {
+	display: flex;
+}
+
+.climbingCard__picture {
+	width: 50px;
+	height: 35px;
+	border-right: solid 1px $darker-shade-of-grey;
+	border-top: solid 1px $darker-shade-of-grey;
+	border-radius: 0 0 0 4px;
+	display: flex;
+
+	i {
+		margin: auto;
+		color: $dark-blue;
+	}
+}
+
+.climbingCard__routeName {
+	height: 35px;
+	border-top: solid 1px $darker-shade-of-grey;
+	width: 200px;
+	font-size: 14px;
+	color: $dark-blue;
+	padding: 0 12px 0 0;
 }

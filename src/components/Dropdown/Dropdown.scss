@@ -38,7 +38,7 @@ $dropdownWidth: 300px;
 
 .dropdown__options {
 	z-index: 1;
-	position: absolute;
+	position: relative;
 	width: calc(#{$dropdownWidth} - 2px);
 	border: solid 1px $weird-blue;
 	border-radius: 0 0 4px 4px;

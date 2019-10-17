@@ -5,9 +5,12 @@
 @import './Variables.scss';
 @import './App.scss';
 
-// Components
+// Base Components
 @import './components/Button/Button.scss';
 @import './components/Dropdown/Dropdown.scss';
+@import './components/TextInput/TextInput.scss';
+
+// Rich components
 @import './components/Modal/Modal.scss';
 @import './components/Modal/NewSession/NewSession.scss';
 @import './components/ClimbCard/ClimbCard.scss';
