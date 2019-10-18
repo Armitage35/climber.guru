@@ -18,27 +18,53 @@ export default {
 	name: 'app',
 	components: { Modal },
 	created: function() {
-		this.$http.get(''+'users').then(
-			response => {
-				return response.json();
-			},
-			error => {
-				return error;
-			}
-		).then(res => {console.log(res); });// eslint-disable-line no-console
+		this.getUserDetails();
+		this.getUserSessions();
+		this.getUserClimbs();
 	},
 	data: function() {
 		return {
 			appState: {
 				modal: {
 					active: true
-				}
-			}
+				},
+				userID: 1
+			},
 		};
 	},
 	methods: {
 		toggleModal: function() {
 			this.appState.modal.active = !this.appState.modal.active;
+		},
+		getUserDetails: function() {
+			this.$http.get(''+'users?userID='+this.appState.userID).then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then();
+		},
+		getUserSessions: function() {
+			this.$http.get(''+'sessions?userID='+this.appState.userID).then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then();
+		},
+		getUserClimbs: function() {
+			this.$http.get(''+'climbs?userID='+this.appState.userID).then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then();
 		}
 	}
 };
