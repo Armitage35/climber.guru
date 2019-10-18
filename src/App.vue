@@ -17,6 +17,16 @@ import Modal from './components/Modal/Modal';
 export default {
 	name: 'app',
 	components: { Modal },
+	created: function() {
+		this.$http.get(''+'users').then(
+			response => {
+				return response.json();
+			},
+			error => {
+				return error;
+			}
+		).then(res => {console.log(res); });// eslint-disable-line no-console
+	},
 	data: function() {
 		return {
 			appState: {
