@@ -22,4 +22,4 @@ Climber Guru lets you save your climbs and answer some of the questions we climb
 I will also provide you with the means to bring your climbing book over from your shelf and in a place you are actually able to get to when you need to.
 
 ----
-Brought to you by [Armitage](https://armitageweb.net) and made with :heart: in beautiful Montreal
+Brought to you by [Armitage](https://armitageweb.net) and made with ❤️ in beautiful Montreal
