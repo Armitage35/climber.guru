@@ -7,7 +7,8 @@
 					<i class="fas fa-times" @click="$emit('toggleModal')"></i>
 				</div>
 			</div>
-			<NewSession :actions="actions"></NewSession>
+			<NewSession :actions="actions" 			:userPreferences="userPreferences"
+			></NewSession>
 		</div>
 	</div>
 </template>
@@ -16,7 +17,7 @@
 import NewSession from './NewSession/NewSession';
 
 export default {
-	props: ['title'],
+	props: ['title', 'userPreferences'],
 	components: { NewSession },
 	data: function() {
 		return {

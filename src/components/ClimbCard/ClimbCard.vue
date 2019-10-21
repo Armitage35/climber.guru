@@ -16,7 +16,7 @@
 				title="climbing type"
 				name="climbGrade"
 				type="text"
-				:options="boulderLevels"
+				:options="gradeResolver"
 				:preset="climb.grade"
 				@valueChanged="climb.grade = $event[1].replace(/\s/g, '')"
 			></Dropdown>
@@ -67,6 +67,10 @@ export default {
 		},
 		climbID: {
 			type: Number
+		},
+		grades: {
+			type: Array,
+			required: false
 		}
 	},
 	data: function() {
@@ -76,12 +80,14 @@ export default {
 		};
 	},
 	computed: {
-		boulderLevels: function() {
-			let boulderLevel = [];
-			for (let i = 0; i < 15; i++) {
-				boulderLevel.push('V' + i);
+		gradeResolver: function() {
+			let selectableGrades = [];
+
+			for (let i = 0; i < this.grades.length; i++) {
+				selectableGrades.push(this.grades[i].grade_name);
 			}
-			return boulderLevel;
+
+			return selectableGrades;
 		},
 		iconResolver: function() {
 			switch (this.climb.type) {

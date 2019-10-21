@@ -35,6 +35,7 @@
 					:key="index"
 					:climbID="index"
 					:climb="climb"
+					:grades="availableGrades"
 					@removeClimb="climbs.splice($event, 1)"
 					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
 				></ClimbCard>
@@ -71,10 +72,10 @@ import ClimbCard from '../../ClimbCard/ClimbCard';
 
 export default {
 	components: { Button, ClimbCard, Dropdown },
-	props: ['actions'],
+	props: ['actions', 'userPreferences'],
 	data: function() {
 		return {
-			climbTypes: ['bouldering', 'lead', 'top rope', 'ice'],
+			climbTypes: ['bouldering', 'top rope', 'lead'],
 			climbGym: ['Bloc shop', 'Zero gravite', 'Allez Up!'],
 			session: {
 				date: '',
@@ -92,6 +93,15 @@ export default {
 				}
 			]
 		};
+	},
+	computed: {
+		availableGrades: function() {
+			if (this.session.type === 'Bouldering' || this.session.type === ' bouldering ') {
+				return this.userPreferences.grades.boulderGrades;
+			} else {
+				return this.userPreferences.grades.routeGrades;
+			}
+		}
 	},
 	methods: {
 		uploadSession: function() {

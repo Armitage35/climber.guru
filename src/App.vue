@@ -1,9 +1,10 @@
 <template>
 	<div id="app">
 		<Modal
-			v-if="appState.modal.active"
+			v-if="appState.modal.active && !appState.isLoading"
 			@toggleModal="toggleModal"
 			title="New session"
+			:userPreferences="appState.userPreferences"
 		></Modal>
 	</div>
 </template>
@@ -25,10 +26,14 @@ export default {
 	data: function() {
 		return {
 			appState: {
+				isLoading: true,
 				modal: {
 					active: true
 				},
-				userID: 1
+				userID: 1,
+				userPreferences: {
+					preferredLocation: 'Bloc Shop'
+				}
 			},
 		};
 	},
@@ -37,22 +42,27 @@ export default {
 			this.appState.modal.active = !this.appState.modal.active;
 		},
 		getUserDetails: function() {
-			this.$http.get(''+'users?userID='+this.appState.userID).then(
+
+			this.$http.get(''+'user?userID='+this.appState.userID).then(
 				response => {
 					return response.json();
 				},
 				error => {
 					return error;
 				}
-			).then();
+			).then(data => {
+				this.appState.userPreferences = data;
+				this.appState.isLoading = false;
+				// this.appState.userPreferences.grades = data.grades;
+			});
 		},
 		getUserSessions: function() {
 			this.$http.get(''+'sessions?userID='+this.appState.userID).then(
-				response => {
-					return response.json();
-				},
 				error => {
 					return error;
+				},
+				response => {
+					return response.json();
 				}
 			).then();
 		},
