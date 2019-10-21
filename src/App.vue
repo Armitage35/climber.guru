@@ -1,28 +1,71 @@
 <template>
 	<div id="app">
-		<img alt="Vue logo" src="./assets/logo.png">
-		<HelloWorld msg="Welcome to Your Vue.js App"/>
+		<Modal
+			v-if="appState.modal.active"
+			@toggleModal="toggleModal"
+			title="New session"
+		></Modal>
 	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import './Master.scss';
+import 'izitoast/dist/css/iziToast.min.css';
+
+import Modal from './components/Modal/Modal';
 
 export default {
 	name: 'app',
-	components: {
-		HelloWorld
+	components: { Modal },
+	created: function() {
+		this.getUserDetails();
+		this.getUserSessions();
+		this.getUserClimbs();
+	},
+	data: function() {
+		return {
+			appState: {
+				modal: {
+					active: true
+				},
+				userID: 1
+			},
+		};
+	},
+	methods: {
+		toggleModal: function() {
+			this.appState.modal.active = !this.appState.modal.active;
+		},
+		getUserDetails: function() {
+			this.$http.get(''+'users?userID='+this.appState.userID).then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then();
+		},
+		getUserSessions: function() {
+			this.$http.get(''+'sessions?userID='+this.appState.userID).then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then();
+		},
+		getUserClimbs: function() {
+			this.$http.get(''+'climbs?userID='+this.appState.userID).then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then();
+		}
 	}
-}
+};
 </script>
-
-<style>
-#app {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-</style>

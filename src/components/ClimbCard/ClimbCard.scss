@@ -1,0 +1,138 @@
+// Local variables
+@mixin transform($lineType) {
+	border: $lineType 1px $darker-shade-of-grey;
+}
+
+%icon {
+	display: flex;
+	width: 60px;
+	height: 60px;
+	margin: auto;
+	border-radius: 100%;
+	justify-content: center;
+
+	i {
+		display: flex;
+		width: 36px;
+		color: $plain-white;
+		justify-content: center;
+		align-self: center;
+	}
+}
+
+%climbCard {
+	width: 250px;
+	border-radius: 4px;
+	padding-top: 14px;
+	margin-right: 24px;
+	transition: ease 0.5s;
+}
+
+%climbCard:hover {
+	box-shadow: $defaultShadow;
+}
+
+%cardAction {
+	display: flex;
+	width: 50px;
+	height: 35px;
+	border-top: solid 1px $darker-shade-of-grey;
+	cursor: pointer;
+
+	i {
+		margin: auto;
+		color: $dark-blue;
+	}
+}
+
+// Hard styles
+.climbCard {
+	@extend %climbCard;
+	@include transform(solid);
+}
+
+.climbCard--new {
+	@extend %climbCard;
+	@include transform(dashed);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.climbCard__icon--green {
+	@extend %icon;
+	background-color: $green;
+}
+
+.climbCard__icon--blue {
+	@extend %icon;
+	background-color: $blue;
+}
+
+.climbCard__icon--purple {
+	@extend %icon;
+	background-color: $romeo-purple;
+}
+
+.climbCard__icon--orange {
+	@extend %icon;
+	background-color: $orange;
+}
+
+.climbCard__icon--red {
+	@extend %icon;
+	background-color: $red;
+}
+
+.climbCard__icon--black {
+	@extend %icon;
+	background-color: $black;
+}
+
+.climbCard__icon--new {
+	@extend %icon;
+	background-color: $dark-blue;
+}
+
+.climbCard__dropdowns {
+	padding: 14px;
+}
+
+.climbCard__footer {
+	display: flex;
+}
+
+.climbingCard__picture {
+	@extend %cardAction;
+	border-radius: 0 0 0 4px;
+	border-right: solid 1px $darker-shade-of-grey;
+}
+
+.climbCard__icon--trash {
+	@extend %cardAction;
+	border-radius: 0 0 4px;
+	border-left: solid 1px $darker-shade-of-grey;
+}
+
+.climbingCard__routeName {
+	width: 150px;
+	height: 35px;
+	color: $dark-blue;
+	border-top: solid 1px $darker-shade-of-grey;
+	font-size: 14px;
+	padding: 0 12px 0 0;
+
+	input {
+		margin: 6px;
+		max-width: 150px;
+	}
+}
+
+.climbCard__label {
+	margin: auto;
+	color: $dark-blue;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 14px;
+}
