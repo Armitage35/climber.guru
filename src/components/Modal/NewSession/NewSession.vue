@@ -9,7 +9,7 @@
 					:options="climbTypes"
 					:preset="session.type"
 					icon="fas fa-map-marker-alt"
-					@valueChanged="session.type = $event[1]"
+					@valueChanged="updateClimbType($event)"
 				></Dropdown>
 				<Dropdown
 					title="session date"
@@ -36,6 +36,7 @@
 					:climbID="index"
 					:climb="climb"
 					:grades="availableGrades"
+					:climbPerformances="climbPerformances"
 					@removeClimb="climbs.splice($event, 1)"
 					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
 				></ClimbCard>
@@ -72,7 +73,7 @@ import ClimbCard from '../../ClimbCard/ClimbCard';
 
 export default {
 	components: { Button, ClimbCard, Dropdown },
-	props: ['actions', 'userPreferences'],
+	props: ['actions', 'userPreferences', 'climbPerformances'],
 	data: function() {
 		return {
 			climbTypes: ['bouldering', 'top rope', 'lead'],
@@ -84,12 +85,8 @@ export default {
 			},
 			climbs: [
 				{
-					type: 'Redpoint',
-					grade: 'V5'
-				},
-				{
-					type: 'Flash',
-					grade: 'V4'
+					type: 'flash',
+					grade: 'V3'
 				}
 			]
 		};
@@ -130,6 +127,10 @@ export default {
 					return error;
 				}
 			).then();
+		},
+		updateClimbType(event) {
+			this.session.type = event[1];
+			this.climbs = [];
 		}
 	}
 };

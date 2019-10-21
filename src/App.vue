@@ -5,6 +5,7 @@
 			@toggleModal="toggleModal"
 			title="New session"
 			:userPreferences="appState.userPreferences"
+			:climbPerformances="appState.climbPerformances"
 		></Modal>
 	</div>
 </template>
@@ -20,8 +21,7 @@ export default {
 	components: { Modal },
 	created: function() {
 		this.getUserDetails();
-		this.getUserSessions();
-		this.getUserClimbs();
+		this.getClimbPerformance();
 	},
 	data: function() {
 		return {
@@ -42,7 +42,6 @@ export default {
 			this.appState.modal.active = !this.appState.modal.active;
 		},
 		getUserDetails: function() {
-
 			this.$http.get(''+'user?userID='+this.appState.userID).then(
 				response => {
 					return response.json();
@@ -53,7 +52,18 @@ export default {
 			).then(data => {
 				this.appState.userPreferences = data;
 				this.appState.isLoading = false;
-				// this.appState.userPreferences.grades = data.grades;
+			});
+		},
+		getClimbPerformance: function() {
+			this.$http.get(''+'performance').then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then(data => {
+				this.appState.climbPerformances = data;
 			});
 		},
 		getUserSessions: function() {

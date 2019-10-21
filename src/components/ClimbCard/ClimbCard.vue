@@ -61,22 +61,25 @@ export default {
 			type: Boolean,
 			required: true
 		},
-		climb: {
-			type: Object,
-			required: false
-		},
 		climbID: {
 			type: Number
 		},
 		grades: {
 			type: Array,
 			required: false
+		},
+		climbPerformances: {
+			type: Object,
+			required: false
 		}
 	},
 	data: function() {
 		return {
-			climbPerformance: ['Onsight', 'Flash', 'Redpoint', 'Repeat'],
 			routeName: '',
+			climb: {
+				type: 'Onsight',
+				grade: this.grades[0].grade_name
+			}
 		};
 	},
 	computed: {
@@ -108,15 +111,15 @@ export default {
 		},
 		colourResolver: function() {
 			let pointsForClimb = this.grades[this.selectedGradeIndex].points;
-			if (pointsForClimb < 10) {
+			if (pointsForClimb < 5) {
 				return '--green';
-			} else if (pointsForClimb < 14) {
+			} else if (pointsForClimb < 11) {
 				return '--blue';
 			} else if (pointsForClimb < 16) {
 				return '--purple';
-			} else if (pointsForClimb < 19) {
-				return '--orange';
 			} else if (pointsForClimb < 21) {
+				return '--orange';
+			} else if (pointsForClimb < 26) {
 				return '--red';
 			} else {
 				return '--black';
