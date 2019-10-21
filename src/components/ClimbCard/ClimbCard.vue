@@ -76,10 +76,13 @@ export default {
 	data: function() {
 		return {
 			climbPerformance: ['Onsight', 'Flash', 'Redpoint', 'Repeat'],
-			routeName: ''
+			routeName: '',
 		};
 	},
 	computed: {
+		selectedGradeIndex: function() {
+			return this.gradeResolver.indexOf(this.climb.grade);
+		},
 		gradeResolver: function() {
 			let selectableGrades = [];
 
@@ -104,31 +107,19 @@ export default {
 			}
 		},
 		colourResolver: function() {
-			switch (this.climb.grade) {
-			case 'V0':
-			case 'V1':
+			let pointsForClimb = this.grades[this.selectedGradeIndex].points;
+			if (pointsForClimb < 10) {
 				return '--green';
-			case 'V2':
-			case 'V3':
+			} else if (pointsForClimb < 14) {
 				return '--blue';
-			case 'V4':
-			case 'V5':
+			} else if (pointsForClimb < 16) {
 				return '--purple';
-			case 'V6':
-			case 'V7':
+			} else if (pointsForClimb < 19) {
 				return '--orange';
-			case 'V8':
-			case 'V9':
+			} else if (pointsForClimb < 21) {
 				return '--red';
-			case 'V10':
-			case 'V11':
-			case 'V12':
-			case 'V13':
-			case 'V14':
-			case 'V15':
+			} else {
 				return '--black';
-			default:
-				return '--green';
 			}
 		}
 	},
