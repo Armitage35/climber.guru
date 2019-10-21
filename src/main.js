@@ -4,9 +4,6 @@ import App from './App.vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
-// eslint-disable-next-line
-console.log(process.env.VUE_APP_SERVER_ADRESS);
-
 Vue.config.productionTip = false;
 
 // eslint-disable-next-line

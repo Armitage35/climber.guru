@@ -57,7 +57,7 @@
 					:type="action.type"
 					:content="action.title"
 					eventName="saveSession"
-					@saveSession="saveSession()"
+					@saveSession="uploadSession()"
 				></Button>
 			</div>
 		</div>
@@ -68,8 +68,6 @@
 import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
 import ClimbCard from '../../ClimbCard/ClimbCard';
-
-// import iziToast from 'izitoast';
 
 export default {
 	components: { Button, ClimbCard, Dropdown },
@@ -96,9 +94,32 @@ export default {
 		};
 	},
 	methods: {
-		saveSession: function() {
-			this.session.date = document.getElementById('sessionDate').value;
-			this.$emit('createNewSession', [this.session, this.climbs]);
+		uploadSession: function() {
+			let finalSession = {
+				userID: 1,
+				session: {
+					date: new Date(),
+					type: 'Bouldering',
+					location: 2,
+				},
+				climbs: [{
+					grade: 125,
+					quality: 1
+				},
+				{
+					grade: 123,
+					quality: 2
+				}]
+			};
+
+			this.$http.post(''+'sessions', finalSession, 'POST').then(
+				response => {
+					return response.json();
+				},
+				error => {
+					return error;
+				}
+			).then();
 		}
 	}
 };
