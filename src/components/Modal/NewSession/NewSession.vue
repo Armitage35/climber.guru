@@ -17,15 +17,6 @@
 					name="sessionDate"
 					icon="far fa-calendar-alt"
 				></Dropdown>
-				<Dropdown
-					title="Climbing location"
-					type="text"
-					name="sessionLocation"
-					icon="fas fa-mountain"
-					:options="climbGym"
-					:preset="session.location"
-					@valueChanged="session.location = $event[1]"
-				></Dropdown>
 			</div>
 			<label>What did you climb today?</label>
 			<div class="newSession_climbs">
@@ -74,11 +65,9 @@ export default {
 	data: function() {
 		return {
 			climbTypes: ['bouldering', 'route'],
-			climbGym: ['Bloc shop', 'Zero gravite', 'Allez Up!'],
 			session: {
 				date: '',
 				type: 'Bouldering',
-				location: 'Bloc Shop'
 			},
 			climbs: [{}]
 		};
@@ -99,7 +88,6 @@ export default {
 				userID: this.userPreferences.details.id,
 				session: {
 					date: new Date(),
-					location: 2,
 				},
 			};
 
