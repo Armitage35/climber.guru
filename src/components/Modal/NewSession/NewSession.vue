@@ -9,7 +9,7 @@
 					:options="climbTypes"
 					:preset="session.type"
 					icon="fas fa-map-marker-alt"
-					@valueChanged="session.type = $event[1]"
+					@valueChanged="updateClimbType($event)"
 				></Dropdown>
 				<Dropdown
 					title="session date"
@@ -31,22 +31,17 @@
 			<div class="newSession_climbs">
 				<ClimbCard
 					v-for="(climb, index) in climbs"
-					:content="true"
 					:key="index"
 					:climbID="index"
 					:climb="climb"
+					:grades="availableGrades"
+					:climbPerformances="climbPerformances"
 					@removeClimb="climbs.splice($event, 1)"
 					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
+					@climbTypeUpdated="climbs[$event[0]].type = $event[1]"
+					@climbGradeUpdated="climbs[$event[0]].grade = $event[1]"
 				></ClimbCard>
-				<ClimbCard
-					:content="false"
-					@addClimb="
-						climbs.push({
-							type: 'Redpoint',
-							grade: 'V5'
-						})
-					"
-				></ClimbCard>
+				<EmptyClimbCard @addClimb="climbs.push({})"></EmptyClimbCard>
 			</div>
 		</div>
 		<div class="modal__footer">
@@ -68,58 +63,68 @@
 import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
 import ClimbCard from '../../ClimbCard/ClimbCard';
+import EmptyClimbCard from '../../ClimbCard/EmptyClimbCard';
+
+// Importing external modules
+import iziToast from 'izitoast';
 
 export default {
-	components: { Button, ClimbCard, Dropdown },
-	props: ['actions'],
+	components: { Button, ClimbCard, Dropdown, EmptyClimbCard },
+	props: ['actions', 'userPreferences', 'climbPerformances'],
 	data: function() {
 		return {
-			climbTypes: ['bouldering', 'lead', 'top rope', 'ice'],
+			climbTypes: ['bouldering', 'route'],
 			climbGym: ['Bloc shop', 'Zero gravite', 'Allez Up!'],
 			session: {
 				date: '',
 				type: 'Bouldering',
 				location: 'Bloc Shop'
 			},
-			climbs: [
-				{
-					type: 'Redpoint',
-					grade: 'V5'
-				},
-				{
-					type: 'Flash',
-					grade: 'V4'
-				}
-			]
+			climbs: [{}]
 		};
+	},
+	computed: {
+		availableGrades: function() {
+			if (this.session.type === 'Bouldering' || this.session.type === ' bouldering ') {
+				return this.userPreferences.grades.boulderGrades;
+			} else {
+				return this.userPreferences.grades.routeGrades;
+			}
+		}
 	},
 	methods: {
 		uploadSession: function() {
 			let finalSession = {
-				userID: 1,
+				climbs: this.climbs,
+				userID: this.userPreferences.details.id,
 				session: {
 					date: new Date(),
-					type: 'Bouldering',
 					location: 2,
 				},
-				climbs: [{
-					grade: 125,
-					quality: 1
-				},
-				{
-					grade: 123,
-					quality: 2
-				}]
 			};
 
 			this.$http.post(''+'sessions', finalSession, 'POST').then(
 				response => {
-					return response.json();
+					return response;
 				},
 				error => {
 					return error;
 				}
-			).then();
+			).then(data => { // eslint-disable-line
+				iziToast.success({
+					title: 'Session saved',
+					message: 'Congratulations!',
+					position: 'topRight'
+				});
+			}
+			);
+		},
+		updateClimbType(event) {
+			this.session.type = event[1];
+			this.climbs = [];
+		},
+		climbGradeIDResolver(grade){
+			return this.availableGrades[grade].id;
 		}
 	}
 };

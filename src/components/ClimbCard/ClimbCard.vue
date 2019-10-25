@@ -1,5 +1,5 @@
 <template>
-	<div v-if="content" class="climbCard">
+	<div class="climbCard">
 		<div :class="'climbCard__icon' + colourResolver">
 			<i :class="iconResolver"></i>
 		</div>
@@ -8,17 +8,17 @@
 				title="climbing type"
 				name="climbType"
 				type="text"
-				:options="climbPerformance"
-				:preset="climb.type"
-				@valueChanged="climb.type = $event[1].replace(/\s/g, '')"
+				:options="performanceResolver"
+				:preset="climbType"
+				@valueChanged="climbType = $event[1].replace(/\s/g, '')"
 			></Dropdown>
 			<Dropdown
 				title="climbing type"
 				name="climbGrade"
 				type="text"
-				:options="boulderLevels"
-				:preset="climb.grade"
-				@valueChanged="climb.grade = $event[1].replace(/\s/g, '')"
+				:options="gradeResolver"
+				:preset="climbGrade"
+				@valueChanged="climbGrade = $event[1].replace(/\s/g, '')"
 			></Dropdown>
 		</div>
 		<div class="climbCard__footer">
@@ -40,14 +40,7 @@
 			</div>
 		</div>
 	</div>
-	<div v-else class="climbCard--new" @click="$emit('addClimb')">
-		<div class="climbCard__addClimb">
-			<div class="climbCard__icon--new">
-				<i class="fas fa-plus-circle"></i>
-			</div>
-			<div class="climbCard__label">Add a climb</div>
-		</div>
-	</div>
+
 </template>
 
 <script>
@@ -57,34 +50,50 @@ import TextInput from '../TextInput/TextInput';
 export default {
 	components: { Dropdown, TextInput },
 	props: {
-		content: {
-			type: Boolean,
+		climbID: {
+			type: Number,
 			required: true
 		},
-		climb: {
-			type: Object,
-			required: false
+		grades: {
+			type: Array,
+			required: true
 		},
-		climbID: {
-			type: Number
+		climbPerformances: {
+			type: Array,
+			required: true
 		}
 	},
 	data: function() {
 		return {
-			climbPerformance: ['Onsight', 'Flash', 'Redpoint', 'Repeat'],
-			routeName: ''
+			routeName: '',
+			climbType: this.climbPerformances[0].name || undefined,
+			climbGrade: this.grades[0].grade_name
 		};
 	},
 	computed: {
-		boulderLevels: function() {
-			let boulderLevel = [];
-			for (let i = 0; i < 15; i++) {
-				boulderLevel.push('V' + i);
+		selectedGradeIndex: function() {
+			return this.gradeResolver.indexOf(this.climbGrade);
+		},
+		gradeResolver: function() {
+			let selectableGrades = [];
+
+			for (let i = 0; i < this.grades.length; i++) {
+				selectableGrades.push(this.grades[i].grade_name);
 			}
-			return boulderLevel;
+
+			return selectableGrades;
+		},
+		performanceResolver: function() {
+			let result = [];
+
+			for (let i=0; i < this.climbPerformances.length; i++){
+				result.push(this.climbPerformances[i].name);
+			}
+
+			return result;
 		},
 		iconResolver: function() {
-			switch (this.climb.type) {
+			switch (this.climbType) {
 			case 'Onsight':
 				return 'far fa-eye';
 			case 'Flash':
@@ -98,37 +107,35 @@ export default {
 			}
 		},
 		colourResolver: function() {
-			switch (this.climb.grade) {
-			case 'V0':
-			case 'V1':
+			let pointsForClimb = this.grades[this.selectedGradeIndex].points;
+
+			if (pointsForClimb < 5) {
 				return '--green';
-			case 'V2':
-			case 'V3':
+			} else if (pointsForClimb < 11) {
 				return '--blue';
-			case 'V4':
-			case 'V5':
+			} else if (pointsForClimb < 16) {
 				return '--purple';
-			case 'V6':
-			case 'V7':
+			} else if (pointsForClimb < 21) {
 				return '--orange';
-			case 'V8':
-			case 'V9':
+			} else if (pointsForClimb < 26) {
 				return '--red';
-			case 'V10':
-			case 'V11':
-			case 'V12':
-			case 'V13':
-			case 'V14':
-			case 'V15':
+			} else {
 				return '--black';
-			default:
-				return '--green';
 			}
+		},
+		climbTypeID: function() {
+			return this.performanceResolver.indexOf(this.climbType);
 		}
 	},
 	watch: {
 		routeName: function() {
 			this.$emit('routeNameUpdated', [this.climbID, this.routeName]);
+		},
+		climbType: function() {
+			this.$emit('climbTypeUpdated', [this.climbID, this.climbTypeID]);
+		},
+		climbGrade: function() {
+			this.$emit('climbGradeUpdated', [this.climbID, this.selectedGradeIndex]);
 		}
 	}
 };
