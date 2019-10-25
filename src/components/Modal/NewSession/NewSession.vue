@@ -83,12 +83,7 @@ export default {
 				type: 'Bouldering',
 				location: 'Bloc Shop'
 			},
-			climbs: [
-				{
-					type: 'flash',
-					grade: 'V3'
-				}
-			]
+			climbs: [{}]
 		};
 	},
 	computed: {
@@ -103,15 +98,16 @@ export default {
 	methods: {
 		uploadSession: function() {
 			let finalSession = {
+				climbs: this.climbs,
 				userID: 1,
 				session: {
 					date: new Date(),
-					type: 'Bouldering',
 					location: 2,
 				},
-				// here we need to convert values back to ids
-				climbs: this.climbs
+
 			};
+
+			console.log(); //eslint-disable-line
 
 			this.$http.post(''+'sessions', finalSession, 'POST').then(
 				response => {
@@ -125,6 +121,9 @@ export default {
 		updateClimbType(event) {
 			this.session.type = event[1];
 			this.climbs = [];
+		},
+		climbGradeIDResolver(grade){
+			return this.availableGrades[grade].id;
 		}
 	}
 };
