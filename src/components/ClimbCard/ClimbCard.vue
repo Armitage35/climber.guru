@@ -8,7 +8,7 @@
 				title="climbing type"
 				name="climbType"
 				type="text"
-				:options="climbPerformances"
+				:options="performanceResolver"
 				:preset="climb.type"
 				@valueChanged="climb.type = $event[1].replace(/\s/g, '')"
 			></Dropdown>
@@ -85,13 +85,13 @@ export default {
 			return selectableGrades;
 		},
 		performanceResolver: function() {
-			let performances = [];
+			let result = [];
 
-			for (const performance in this.climbPerformances){
-				performance.push(performance.name);
+			for (let i=0; i < this.climbPerformances.length; i++){
+				result.push(this.climbPerformances[i].name);
 			}
 
-			return performances;
+			return result;
 		},
 		iconResolver: function() {
 			switch (this.climb.type) {
