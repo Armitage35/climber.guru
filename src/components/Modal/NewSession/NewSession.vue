@@ -40,15 +40,12 @@
 					@removeClimb="climbs.splice($event, 1)"
 					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
 				></ClimbCard>
-				<ClimbCard
-					:content="false"
-					@addClimb="
+				<EmptyClimbCard @addClimb="
 						climbs.push({
 							type: 'Redpoint',
 							grade: 'V5'
 						})
-					"
-				></ClimbCard>
+					"></EmptyClimbCard>
 			</div>
 		</div>
 		<div class="modal__footer">
@@ -70,9 +67,10 @@
 import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
 import ClimbCard from '../../ClimbCard/ClimbCard';
+import EmptyClimbCard from '../../ClimbCard/EmptyClimbCard';
 
 export default {
-	components: { Button, ClimbCard, Dropdown },
+	components: { Button, ClimbCard, Dropdown, EmptyClimbCard },
 	props: ['actions', 'userPreferences', 'climbPerformances'],
 	data: function() {
 		return {

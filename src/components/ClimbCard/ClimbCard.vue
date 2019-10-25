@@ -1,5 +1,5 @@
 <template>
-	<div v-if="content" class="climbCard">
+	<div class="climbCard">
 		<div :class="'climbCard__icon' + colourResolver">
 			<i :class="iconResolver"></i>
 		</div>
@@ -8,7 +8,7 @@
 				title="climbing type"
 				name="climbType"
 				type="text"
-				:options="climbPerformance"
+				:options="climbPerformances"
 				:preset="climb.type"
 				@valueChanged="climb.type = $event[1].replace(/\s/g, '')"
 			></Dropdown>
@@ -40,29 +40,16 @@
 			</div>
 		</div>
 	</div>
-	<div v-else class="climbCard--new" @click="$emit('addClimb')">
-		<div class="climbCard__addClimb">
-			<div class="climbCard__icon--new">
-				<i class="fas fa-plus-circle"></i>
-			</div>
-			<div class="climbCard__label">Add a climb</div>
-		</div>
-	</div>
+
 </template>
 
 <script>
-// @TODO split climb card into climb card w/ data and empty
-
 import Dropdown from '../Dropdown/Dropdown';
 import TextInput from '../TextInput/TextInput';
 
 export default {
 	components: { Dropdown, TextInput },
 	props: {
-		content: {
-			type: Boolean,
-			required: true
-		},
 		climbID: {
 			type: Number
 		},
@@ -71,7 +58,7 @@ export default {
 			required: false
 		},
 		climbPerformances: {
-			type: Object,
+			type: Array,
 			required: false
 		}
 	},
@@ -96,6 +83,15 @@ export default {
 			}
 
 			return selectableGrades;
+		},
+		performanceResolver: function() {
+			let performances = [];
+
+			for (const performance in this.climbPerformances){
+				performance.push(performance.name);
+			}
+
+			return performances;
 		},
 		iconResolver: function() {
 			switch (this.climb.type) {
