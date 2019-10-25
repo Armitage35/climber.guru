@@ -71,7 +71,7 @@ export default {
 	},
 	methods: {
 		select: function(event) {
-			this.currentValue = event.target.innerHTML
+			this.currentValue = event.target.textContent
 				.replace(/\n\t\t\t/g, '')
 				.replace(/\t/g, '');
 

@@ -51,21 +51,22 @@ export default {
 	components: { Dropdown, TextInput },
 	props: {
 		climbID: {
-			type: Number
+			type: Number,
+			required: true
 		},
 		grades: {
 			type: Array,
-			required: false
+			required: true
 		},
 		climbPerformances: {
 			type: Array,
-			required: false
+			required: true
 		}
 	},
 	data: function() {
 		return {
 			routeName: '',
-			climbType: 'Onsight',
+			climbType: this.climbPerformances[0].name || undefined,
 			climbGrade: this.grades[0].grade_name
 		};
 	},
@@ -107,6 +108,7 @@ export default {
 		},
 		colourResolver: function() {
 			let pointsForClimb = this.grades[this.selectedGradeIndex].points;
+
 			if (pointsForClimb < 5) {
 				return '--green';
 			} else if (pointsForClimb < 11) {

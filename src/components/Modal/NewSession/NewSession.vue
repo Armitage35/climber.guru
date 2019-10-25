@@ -41,9 +41,7 @@
 					@climbTypeUpdated="climbs[$event[0]].type = $event[1]"
 					@climbGradeUpdated="climbs[$event[0]].grade = $event[1]"
 				></ClimbCard>
-				<EmptyClimbCard @addClimb="
-						climbs.push({})
-					"></EmptyClimbCard>
+				<EmptyClimbCard @addClimb="climbs.push({})"></EmptyClimbCard>
 			</div>
 		</div>
 		<div class="modal__footer">
@@ -98,7 +96,7 @@ export default {
 		uploadSession: function() {
 			let finalSession = {
 				climbs: this.climbs,
-				userID: 1,
+				userID: this.userPreferences.details.id,
 				session: {
 					date: new Date(),
 					location: 2,
