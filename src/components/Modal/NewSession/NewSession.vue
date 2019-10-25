@@ -31,7 +31,6 @@
 			<div class="newSession_climbs">
 				<ClimbCard
 					v-for="(climb, index) in climbs"
-					:content="true"
 					:key="index"
 					:climbID="index"
 					:climb="climb"
@@ -43,10 +42,7 @@
 					@climbGradeUpdated="climbs[$event[0]].grade = $event[1]"
 				></ClimbCard>
 				<EmptyClimbCard @addClimb="
-						climbs.push({
-							type: '',
-							grade: ''
-						})
+						climbs.push({})
 					"></EmptyClimbCard>
 			</div>
 		</div>
@@ -70,6 +66,9 @@ import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
 import ClimbCard from '../../ClimbCard/ClimbCard';
 import EmptyClimbCard from '../../ClimbCard/EmptyClimbCard';
+
+// Importing external modules
+import iziToast from 'izitoast';
 
 export default {
 	components: { Button, ClimbCard, Dropdown, EmptyClimbCard },
@@ -104,19 +103,23 @@ export default {
 					date: new Date(),
 					location: 2,
 				},
-
 			};
-
-			console.log(); //eslint-disable-line
 
 			this.$http.post(''+'sessions', finalSession, 'POST').then(
 				response => {
-					return response.json();
+					return response;
 				},
 				error => {
 					return error;
 				}
-			).then();
+			).then(data => { // eslint-disable-line
+				iziToast.success({
+					title: 'Session saved',
+					message: 'Congratulations!',
+					position: 'topRight'
+				});
+			}
+			);
 		},
 		updateClimbType(event) {
 			this.session.type = event[1];
