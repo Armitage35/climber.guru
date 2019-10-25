@@ -120,6 +120,9 @@ export default {
 			} else {
 				return '--black';
 			}
+		},
+		climbTypeID: function() {
+			return this.performanceResolver.indexOf(this.climbType);
 		}
 	},
 	watch: {
@@ -127,10 +130,10 @@ export default {
 			this.$emit('routeNameUpdated', [this.climbID, this.routeName]);
 		},
 		climbType: function() {
-			this.$emit('climbTypeUpdated', [this.climbID, this.climbType]);
+			this.$emit('climbTypeUpdated', [this.climbID, this.climbTypeID]);
 		},
 		climbGrade: function() {
-			this.$emit('climbGradeUpdated', [this.climbID, this.climbGrade]);
+			this.$emit('climbGradeUpdated', [this.climbID, this.selectedGradeIndex]);
 		}
 	}
 };

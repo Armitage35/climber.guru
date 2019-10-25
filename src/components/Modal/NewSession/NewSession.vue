@@ -109,16 +109,8 @@ export default {
 					type: 'Bouldering',
 					location: 2,
 				},
-				climbs: [{
-					grade: 125,
-					quality: 1,
-					performance: 2
-				},
-				{
-					grade: 123,
-					quality: 2,
-					performance: 2
-				}]
+				// here we need to convert values back to ids
+				climbs: this.climbs
 			};
 
 			this.$http.post(''+'sessions', finalSession, 'POST').then(
