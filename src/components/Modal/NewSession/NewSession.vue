@@ -39,11 +39,13 @@
 					:climbPerformances="climbPerformances"
 					@removeClimb="climbs.splice($event, 1)"
 					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
+					@climbTypeUpdated="climbs[$event[0]].type = $event[1]"
+					@climbGradeUpdated="climbs[$event[0]].grade = $event[1]"
 				></ClimbCard>
 				<EmptyClimbCard @addClimb="
 						climbs.push({
-							type: 'Redpoint',
-							grade: 'V5'
+							type: '',
+							grade: ''
 						})
 					"></EmptyClimbCard>
 			</div>
@@ -74,7 +76,7 @@ export default {
 	props: ['actions', 'userPreferences', 'climbPerformances'],
 	data: function() {
 		return {
-			climbTypes: ['bouldering', 'top rope', 'lead'],
+			climbTypes: ['bouldering', 'route'],
 			climbGym: ['Bloc shop', 'Zero gravite', 'Allez Up!'],
 			session: {
 				date: '',
@@ -109,11 +111,13 @@ export default {
 				},
 				climbs: [{
 					grade: 125,
-					quality: 1
+					quality: 1,
+					performance: 2
 				},
 				{
 					grade: 123,
-					quality: 2
+					quality: 2,
+					performance: 2
 				}]
 			};
 

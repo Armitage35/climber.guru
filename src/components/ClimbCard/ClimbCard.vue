@@ -9,16 +9,16 @@
 				name="climbType"
 				type="text"
 				:options="performanceResolver"
-				:preset="climb.type"
-				@valueChanged="climb.type = $event[1].replace(/\s/g, '')"
+				:preset="climbType"
+				@valueChanged="climbType = $event[1].replace(/\s/g, '')"
 			></Dropdown>
 			<Dropdown
 				title="climbing type"
 				name="climbGrade"
 				type="text"
 				:options="gradeResolver"
-				:preset="climb.grade"
-				@valueChanged="climb.grade = $event[1].replace(/\s/g, '')"
+				:preset="climbGrade"
+				@valueChanged="climbGrade = $event[1].replace(/\s/g, '')"
 			></Dropdown>
 		</div>
 		<div class="climbCard__footer">
@@ -65,15 +65,13 @@ export default {
 	data: function() {
 		return {
 			routeName: '',
-			climb: {
-				type: 'Onsight',
-				grade: this.grades[0].grade_name
-			}
+			climbType: 'Onsight',
+			climbGrade: this.grades[0].grade_name
 		};
 	},
 	computed: {
 		selectedGradeIndex: function() {
-			return this.gradeResolver.indexOf(this.climb.grade);
+			return this.gradeResolver.indexOf(this.climbGrade);
 		},
 		gradeResolver: function() {
 			let selectableGrades = [];
@@ -94,7 +92,7 @@ export default {
 			return result;
 		},
 		iconResolver: function() {
-			switch (this.climb.type) {
+			switch (this.climbType) {
 			case 'Onsight':
 				return 'far fa-eye';
 			case 'Flash':
@@ -127,6 +125,12 @@ export default {
 	watch: {
 		routeName: function() {
 			this.$emit('routeNameUpdated', [this.climbID, this.routeName]);
+		},
+		climbType: function() {
+			this.$emit('climbTypeUpdated', [this.climbID, this.climbType]);
+		},
+		climbGrade: function() {
+			this.$emit('climbGradeUpdated', [this.climbID, this.climbGrade]);
 		}
 	}
 };

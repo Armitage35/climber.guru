@@ -20,8 +20,7 @@ export default {
 	name: 'app',
 	components: { Modal },
 	created: function() {
-		this.getUserDetails();
-		this.getClimbPerformance();
+		this.initializeApp();
 	},
 	data: function() {
 		return {
@@ -30,6 +29,7 @@ export default {
 				modal: {
 					active: true
 				},
+				climbPerformances: [],
 				userID: 1,
 				userPreferences: {
 					preferredLocation: 'Bloc Shop'
@@ -85,6 +85,10 @@ export default {
 					return error;
 				}
 			).then();
+		},
+		initializeApp: function() {
+			this.getUserDetails();
+			this.getClimbPerformance();
 		}
 	}
 };
