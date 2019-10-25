@@ -1,7 +1,7 @@
 # Climber Guru
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Armitage35/fuzzy-roadmap/graphs/commit-activity)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Armitage35/fuzzy-roadmap/blob/dev/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Armitage35/climber.guru/graphs/commit-activity)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Armitage35/climber.guru/blob/dev/LICENSE)
 ![Made with Vue](https://img.shields.io/badge/Made%20with-Vue.js-%2341b883)
 
 Climber Guru is an app for climbers who want to get more out of their training through more data.
