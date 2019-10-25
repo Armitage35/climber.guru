@@ -51,6 +51,8 @@
 </template>
 
 <script>
+// @TODO split climb card into climb card w/ data and empty
+
 import Dropdown from '../Dropdown/Dropdown';
 import TextInput from '../TextInput/TextInput';
 
