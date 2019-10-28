@@ -26,7 +26,7 @@
 			<div class="dropdown__active">
 				<span>
 					<i :class="icon" id="dropdown__icon" v-if="icon"></i>
-					<input type="date" :id="name"
+					<input type="date" :id="name" v-model="content"
 				/></span>
 			</div>
 		</div>
@@ -66,7 +66,8 @@ export default {
 		return {
 			currentValue: '',
 			componentPreset: this.presetResolver,
-			hasBeenUpdated: false
+			hasBeenUpdated: false,
+			content: ''
 		};
 	},
 	methods: {
