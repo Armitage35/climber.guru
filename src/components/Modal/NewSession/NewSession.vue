@@ -69,7 +69,7 @@ export default {
 				date: '',
 				type: 'Bouldering',
 			},
-			climbs: [{}]
+			climbs: []
 		};
 	},
 	computed: {
@@ -89,22 +89,33 @@ export default {
 				date: document.getElementById('sessionDate').value,
 			};
 
-			this.$http.post(''+'sessions', finalSession, 'POST').then(
-				response => {
-					return response;
-				},
-				error => {
-					return error;
-				}
-			).then(data => { // eslint-disable-line
-				iziToast.success({
-					title: 'Session saved',
-					message: 'Congratulations!',
+			if (finalSession.date) {
+				this.$http.post(''+'sessions', finalSession, 'POST').then(
+					response => {
+						iziToast.success({
+							title: 'Session saved',
+							message: 'Congratulations!',
+							position: 'topRight'
+						});
+						this.$emit('toggleModal');
+						return response;
+					},
+					error => {
+						iziToast.error({
+							title: 'Something unexpected happened',
+							message: error,
+							position: 'topRight'
+						});
+						return error;
+					}
+				);
+			} else {
+				iziToast.error({
+					title: 'Hold on',
+					message: 'You need to provide a date for your session to be saved',
 					position: 'topRight'
 				});
-				this.$emit('toggleModal');
 			}
-			);
 		},
 		updateClimbType(event) {
 			this.session.type = event[1];
