@@ -15,6 +15,7 @@ import './Master.scss';
 import 'izitoast/dist/css/iziToast.min.css';
 
 import Modal from './components/Modal/Modal';
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'app',
@@ -30,7 +31,6 @@ export default {
 					active: true
 				},
 				climbPerformances: [],
-				userID: this.$store.state.userID,
 				userPreferences: {
 				}
 			},
@@ -41,7 +41,7 @@ export default {
 			this.appState.modal.active = !this.appState.modal.active;
 		},
 		getUserDetails: function() {
-			this.$http.get(''+'user?userID='+this.appState.userID).then(
+			this.$http.get(''+'user?userID='+this.getUserID).then(
 				response => {
 					return response.json();
 				},
@@ -66,7 +66,7 @@ export default {
 			});
 		},
 		getUserSessions: function() {
-			this.$http.get(''+'sessions?userID='+this.appState.userID).then(
+			this.$http.get(''+'sessions?userID='+this.getUserID).then(
 				error => {
 					return error;
 				},
@@ -76,7 +76,7 @@ export default {
 			).then();
 		},
 		getUserClimbs: function() {
-			this.$http.get(''+'climbs?userID='+this.appState.userID).then(
+			this.$http.get(''+'climbs?userID='+ this.getUserID).then(
 				response => {
 					return response.json();
 				},
@@ -89,6 +89,9 @@ export default {
 			this.getUserDetails();
 			this.getClimbPerformance();
 		}
+	},
+	computed: {
+		...mapGetters (['getUserID'])
 	}
 };
 </script>

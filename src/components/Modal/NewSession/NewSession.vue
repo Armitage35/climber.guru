@@ -58,6 +58,8 @@ import EmptyClimbCard from '../../ClimbCard/EmptyClimbCard';
 
 // Importing external modules
 import iziToast from 'izitoast';
+import { mapGetters } from 'vuex';
+
 
 export default {
 	components: { Button, ClimbCard, Dropdown, EmptyClimbCard },
@@ -73,6 +75,7 @@ export default {
 		};
 	},
 	computed: {
+		...mapGetters (['getUserID']),
 		availableGrades: function() {
 			if (this.session.type === 'Bouldering' || this.session.type === ' bouldering ') {
 				return this.userPreferences.grades.boulderGrades;
@@ -85,7 +88,7 @@ export default {
 		uploadSession: function() {
 			let finalSession = {
 				climbs: this.climbs,
-				userID: this.userPreferences.details.id,
+				userID: this.getUserID,
 				date: document.getElementById('sessionDate').value,
 			};
 
