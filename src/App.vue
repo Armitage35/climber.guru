@@ -32,7 +32,6 @@ export default {
 				climbPerformances: [],
 				userID: 1,
 				userPreferences: {
-					preferredLocation: 'Bloc Shop'
 				}
 			},
 		};

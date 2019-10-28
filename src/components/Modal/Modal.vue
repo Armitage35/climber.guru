@@ -11,6 +11,7 @@
 				:actions="actions"
 				:userPreferences="userPreferences"
 				:climbPerformances="climbPerformances"
+				@toggleModal="$emit('toggleModal')"
 			></NewSession>
 		</div>
 	</div>

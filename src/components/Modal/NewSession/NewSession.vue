@@ -17,15 +17,6 @@
 					name="sessionDate"
 					icon="far fa-calendar-alt"
 				></Dropdown>
-				<Dropdown
-					title="Climbing location"
-					type="text"
-					name="sessionLocation"
-					icon="fas fa-mountain"
-					:options="climbGym"
-					:preset="session.location"
-					@valueChanged="session.location = $event[1]"
-				></Dropdown>
 			</div>
 			<label>What did you climb today?</label>
 			<div class="newSession_climbs">
@@ -74,13 +65,11 @@ export default {
 	data: function() {
 		return {
 			climbTypes: ['bouldering', 'route'],
-			climbGym: ['Bloc shop', 'Zero gravite', 'Allez Up!'],
 			session: {
 				date: '',
 				type: 'Bouldering',
-				location: 'Bloc Shop'
 			},
-			climbs: [{}]
+			climbs: []
 		};
 	},
 	computed: {
@@ -97,27 +86,36 @@ export default {
 			let finalSession = {
 				climbs: this.climbs,
 				userID: this.userPreferences.details.id,
-				session: {
-					date: new Date(),
-					location: 2,
-				},
+				date: document.getElementById('sessionDate').value,
 			};
 
-			this.$http.post(''+'sessions', finalSession, 'POST').then(
-				response => {
-					return response;
-				},
-				error => {
-					return error;
-				}
-			).then(data => { // eslint-disable-line
-				iziToast.success({
-					title: 'Session saved',
-					message: 'Congratulations!',
+			if (finalSession.date) {
+				this.$http.post(''+'sessions', finalSession, 'POST').then(
+					response => {
+						iziToast.success({
+							title: 'Session saved',
+							message: 'Congratulations!',
+							position: 'topRight'
+						});
+						this.$emit('toggleModal');
+						return response;
+					},
+					error => {
+						iziToast.error({
+							title: 'Something unexpected happened',
+							message: error,
+							position: 'topRight'
+						});
+						return error;
+					}
+				);
+			} else {
+				iziToast.error({
+					title: 'Hold on',
+					message: 'You need to provide a date for your session to be saved',
 					position: 'topRight'
 				});
 			}
-			);
 		},
 		updateClimbType(event) {
 			this.session.type = event[1];
