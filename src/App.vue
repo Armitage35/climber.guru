@@ -30,7 +30,7 @@ export default {
 					active: true
 				},
 				climbPerformances: [],
-				userID: 1,
+				userID: this.$store.state.userID,
 				userPreferences: {
 				}
 			},
