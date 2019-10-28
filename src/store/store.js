@@ -8,6 +8,10 @@ export const store = new Vuex.Store({
 		userID: 1,
 		modal: true,
 		isLoading: true,
+		climbPerformances: [],
+		userPreferences: {},
+		boulderingGrades: [],
+		routeGrades: [],
 	},
 	getters: {
 		getUserID: state => {
@@ -18,6 +22,15 @@ export const store = new Vuex.Store({
 		},
 		getAppLoadingStatus: state => {
 			return state.isLoading;
+		},
+		getBoulderingGrades: state => {
+			return state.boulderingGrades;
+		},
+		getRouteGrades: state => {
+			return state.routeGrades;
+		},
+		getClimbingGrades: state => {
+			return { ...state.boulderingGrades, ...state.routeGrades };
 		}
 	},
 	mutations: {

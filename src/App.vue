@@ -27,8 +27,7 @@ export default {
 		return {
 			appState: {
 				climbPerformances: [],
-				userPreferences: {
-				}
+				userPreferences: {}
 			},
 		};
 	},
@@ -67,7 +66,7 @@ export default {
 				response => {
 					return response.json();
 				}
-			).then();
+			);
 		},
 		getUserClimbs: function() {
 			this.$http.get(''+'climbs?userID='+ this.getUserID).then(
