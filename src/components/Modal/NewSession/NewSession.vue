@@ -86,9 +86,7 @@ export default {
 			let finalSession = {
 				climbs: this.climbs,
 				userID: this.userPreferences.details.id,
-				session: {
-					date: new Date(),
-				},
+				date: document.getElementById('sessionDate').value,
 			};
 
 			this.$http.post(''+'sessions', finalSession, 'POST').then(
@@ -104,6 +102,7 @@ export default {
 					message: 'Congratulations!',
 					position: 'topRight'
 				});
+				this.$emit('toggleModal');
 			}
 			);
 		},
