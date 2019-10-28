@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
 	state: {
 		userID: 1,
-		modal: true
+		modal: true,
+		isLoading: true,
 	},
 	getters: {
 		getUserID: state => {
@@ -14,11 +15,17 @@ export const store = new Vuex.Store({
 		},
 		getModalState: state => {
 			return state.modal;
+		},
+		getAppLoadingStatus: state => {
+			return state.isLoading;
 		}
 	},
 	mutations: {
 		toggleModal: state => {
 			state.modal = !state.modal;
+		},
+		toggleLoadingState: state => {
+			state.isLoading = !state.isLoading;
 		}
 	}
 });

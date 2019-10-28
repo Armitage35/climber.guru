@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<Modal
-			v-if="getModalState && !appState.isLoading"
+			v-if="getModalState && !getAppLoadingStatus"
 			title="New session"
 			:userPreferences="appState.userPreferences"
 			:climbPerformances="appState.climbPerformances"
@@ -26,7 +26,6 @@ export default {
 	data: function() {
 		return {
 			appState: {
-				isLoading: true,
 				climbPerformances: [],
 				userPreferences: {
 				}
@@ -34,9 +33,9 @@ export default {
 		};
 	},
 	methods: {
-		...mapMutations(['toggleModal']),
+		...mapMutations(['toggleModal', 'toggleLoadingState']),
 		getUserDetails: function() {
-			this.$http.get(''+'user?userID='+this.getUserID).then(
+			this.$http.get(''+'user?userID=' + this.getUserID).then(
 				response => {
 					return response.json();
 				},
@@ -45,7 +44,7 @@ export default {
 				}
 			).then(data => {
 				this.appState.userPreferences = data;
-				this.appState.isLoading = false;
+				this.toggleLoadingState();
 			});
 		},
 		getClimbPerformance: function() {
@@ -86,7 +85,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters (['getUserID', 'getModalState'])
+		...mapGetters (['getUserID', 'getModalState', 'getAppLoadingStatus'])
 	}
 };
 </script>
