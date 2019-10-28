@@ -1,8 +1,7 @@
 <template>
 	<div id="app">
 		<Modal
-			v-if="appState.modal.active && !appState.isLoading"
-			@toggleModal="toggleModal"
+			v-if="getModalState && !appState.isLoading"
 			title="New session"
 			:userPreferences="appState.userPreferences"
 			:climbPerformances="appState.climbPerformances"
@@ -16,6 +15,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 import Modal from './components/Modal/Modal';
 import { mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
 	name: 'app',
@@ -27,9 +27,6 @@ export default {
 		return {
 			appState: {
 				isLoading: true,
-				modal: {
-					active: true
-				},
 				climbPerformances: [],
 				userPreferences: {
 				}
@@ -37,9 +34,7 @@ export default {
 		};
 	},
 	methods: {
-		toggleModal: function() {
-			this.appState.modal.active = !this.appState.modal.active;
-		},
+		...mapMutations(['toggleModal']),
 		getUserDetails: function() {
 			this.$http.get(''+'user?userID='+this.getUserID).then(
 				response => {
@@ -91,7 +86,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters (['getUserID'])
+		...mapGetters (['getUserID', 'getModalState'])
 	}
 };
 </script>

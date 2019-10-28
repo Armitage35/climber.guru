@@ -59,7 +59,7 @@ import EmptyClimbCard from '../../ClimbCard/EmptyClimbCard';
 // Importing external modules
 import iziToast from 'izitoast';
 import { mapGetters } from 'vuex';
-
+import { mapMutations } from 'vuex';
 
 export default {
 	components: { Button, ClimbCard, Dropdown, EmptyClimbCard },
@@ -85,6 +85,7 @@ export default {
 		}
 	},
 	methods: {
+		...mapMutations(['toggleModal']),
 		uploadSession: function() {
 			let finalSession = {
 				climbs: this.climbs,
@@ -100,7 +101,7 @@ export default {
 							message: 'Congratulations!',
 							position: 'topRight'
 						});
-						this.$emit('toggleModal');
+						this.toggleModal();
 						return response;
 					},
 					error => {
