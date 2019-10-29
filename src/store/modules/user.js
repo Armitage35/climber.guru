@@ -9,7 +9,14 @@ const getters = {
 	}
 };
 
+const mutations = {
+	setUserPreferences: (state, payload) => {
+		state.userPreferences = payload;
+	}
+};
+
 export default {
 	state,
 	getters,
+	mutations
 };

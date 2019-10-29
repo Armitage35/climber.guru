@@ -16,20 +16,26 @@ const getters = {
 			...state.boulderingGrades,
 			...state.routeGrades
 		};
+	},
+	getClimbPerformances: state => {
+		return state.climbPerformances;
 	}
 };
 
-const actions = {
-
-};
-
 const mutations = {
-
+	setBoulderingGrades: (state, payload) => {
+		state.boulderingGrades = payload;
+	},
+	setRouteGrades: (state, payload) => {
+		state.routeGrades = payload;
+	},
+	setClimbPerformances: (state, payload) => {
+		state.climbPerformances = payload;
+	}
 };
 
 export default {
 	state,
 	getters,
-	mutations,
-	actions
+	mutations
 };

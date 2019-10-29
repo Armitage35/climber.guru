@@ -32,7 +32,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapMutations(['toggleModal', 'toggleLoadingState']),
+		...mapMutations(['toggleModal', 'toggleLoadingState', 'setBoulderingGrades', 'setRouteGrades', 'setUserPreferences', 'setClimbPerformances']),
 		getUserDetails: function() {
 			this.$http.get(''+'user?userID=' + this.getUserID).then(
 				response => {
@@ -42,7 +42,9 @@ export default {
 					return error;
 				}
 			).then(data => {
-				this.appState.userPreferences = data;
+				this.setUserPreferences(data.details);
+				this.setBoulderingGrades(data.grades.boulderGrades);
+				this.setRouteGrades(data.grades.routeGrades);
 				this.toggleLoadingState();
 			});
 		},
@@ -56,6 +58,7 @@ export default {
 				}
 			).then(data => {
 				this.appState.climbPerformances = data;
+				this.setClimbPerformances(data);
 			});
 		},
 		getUserSessions: function() {
@@ -67,16 +70,6 @@ export default {
 					return response.json();
 				}
 			);
-		},
-		getUserClimbs: function() {
-			this.$http.get(''+'climbs?userID='+ this.getUserID).then(
-				response => {
-					return response.json();
-				},
-				error => {
-					return error;
-				}
-			).then();
 		},
 		initializeApp: function() {
 			this.getUserDetails();
