@@ -1,21 +1,17 @@
+Vue.use(Vuex);
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 
 import climb from './modules/climb';
 import modal from './modules/modal';
-
-Vue.use(Vuex);
+import user from './modules/user';
 
 export const store = new Vuex.Store({
 	state: {
-		userID: 1,
 		isLoading: true,
-		userPreferences: {},
 	},
 	getters: {
-		getUserID: state => {
-			return state.userID;
-		},
 		getAppLoadingStatus: state => {
 			return state.isLoading;
 		}
@@ -27,6 +23,7 @@ export const store = new Vuex.Store({
 	},
 	modules: {
 		climb,
-		modal
+		modal,
+		user
 	}
 });
