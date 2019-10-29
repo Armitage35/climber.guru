@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import climb from './modules/climb';
 import modal from './modules/modal';
 
 Vue.use(Vuex);
@@ -9,10 +10,7 @@ export const store = new Vuex.Store({
 	state: {
 		userID: 1,
 		isLoading: true,
-		climbPerformances: [],
 		userPreferences: {},
-		boulderingGrades: [],
-		routeGrades: [],
 	},
 	getters: {
 		getUserID: state => {
@@ -20,18 +18,6 @@ export const store = new Vuex.Store({
 		},
 		getAppLoadingStatus: state => {
 			return state.isLoading;
-		},
-		getBoulderingGrades: state => {
-			return state.boulderingGrades;
-		},
-		getRouteGrades: state => {
-			return state.routeGrades;
-		},
-		getClimbingGrades: state => {
-			return {
-				...state.boulderingGrades,
-				...state.routeGrades
-			};
 		}
 	},
 	mutations: {
@@ -40,6 +26,7 @@ export const store = new Vuex.Store({
 		}
 	},
 	modules: {
+		climb,
 		modal
 	}
 });
