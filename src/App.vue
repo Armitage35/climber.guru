@@ -3,8 +3,6 @@
 		<Modal
 			v-if="getModalState && !getAppLoadingStatus"
 			title="New session"
-			:userPreferences="appState.userPreferences"
-			:climbPerformances="appState.climbPerformances"
 		></Modal>
 	</div>
 </template>
@@ -22,14 +20,6 @@ export default {
 	components: { Modal },
 	created: function() {
 		this.initializeApp();
-	},
-	data: function() {
-		return {
-			appState: {
-				climbPerformances: [],
-				userPreferences: {}
-			},
-		};
 	},
 	methods: {
 		...mapMutations(['toggleModal', 'toggleLoadingState', 'setBoulderingGrades', 'setRouteGrades', 'setUserPreferences', 'setClimbPerformances']),
@@ -57,7 +47,6 @@ export default {
 					return error;
 				}
 			).then(data => {
-				this.appState.climbPerformances = data;
 				this.setClimbPerformances(data);
 			});
 		},

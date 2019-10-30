@@ -25,8 +25,8 @@
 					:key="index"
 					:climbID="index"
 					:climb="climb"
+					:sessionType="session.type"
 					:grades="availableGrades"
-					:climbPerformances="climbPerformances"
 					@removeClimb="climbs.splice($event, 1)"
 					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
 					@climbTypeUpdated="climbs[$event[0]].type = $event[1]"
@@ -63,7 +63,7 @@ import { mapMutations } from 'vuex';
 
 export default {
 	components: { Button, ClimbCard, Dropdown, EmptyClimbCard },
-	props: ['actions', 'userPreferences', 'climbPerformances'],
+	props: ['actions'],
 	data: function() {
 		return {
 			climbTypes: ['bouldering', 'route'],
@@ -71,16 +71,16 @@ export default {
 				date: '',
 				type: 'Bouldering',
 			},
-			climbs: []
+			climbs: [{}]
 		};
 	},
 	computed: {
-		...mapGetters (['getUserID']),
+		...mapGetters (['getUserID', 'getBoulderingGrades', 'getRouteGrades']),
 		availableGrades: function() {
 			if (this.session.type === 'Bouldering' || this.session.type === ' bouldering ') {
-				return this.userPreferences.grades.boulderGrades;
+				return this.getBoulderingGrades;
 			} else {
-				return this.userPreferences.grades.routeGrades;
+				return this.getRouteGrades;
 			}
 		}
 	},
@@ -125,9 +125,9 @@ export default {
 			this.session.type = event[1];
 			this.climbs = [];
 		},
-		climbGradeIDResolver(grade){
-			return this.availableGrades[grade].id;
-		}
+		// climbGradeIDResolver(grade){
+		// 	return this.availableGrades[grade].id;
+		// }
 	}
 };
 </script>

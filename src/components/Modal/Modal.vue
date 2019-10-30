@@ -9,8 +9,6 @@
 			</div>
 			<NewSession
 				:actions="actions"
-				:userPreferences="userPreferences"
-				:climbPerformances="climbPerformances"
 			></NewSession>
 		</div>
 	</div>
@@ -21,7 +19,7 @@ import NewSession from './NewSession/NewSession';
 import { mapMutations } from 'vuex';
 
 export default {
-	props: ['title', 'climbPerformances', 'userPreferences'],
+	props: ['title'],
 	components: { NewSession },
 	data: function() {
 		return {

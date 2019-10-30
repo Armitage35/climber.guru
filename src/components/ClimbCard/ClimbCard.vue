@@ -6,11 +6,11 @@
 		<div class="climbCard__dropdowns">
 			<Dropdown
 				title="climbing type"
-				name="climbType"
+				name="climbPerformance"
 				type="text"
 				:options="performanceResolver"
-				:preset="climbType"
-				@valueChanged="climbType = $event[1].replace(/\s/g, '')"
+				:preset="this.getClimbPerformances[0].name"
+				@valueChanged="performance = $event[1].replace(/\s/g, '')"
 			></Dropdown>
 			<Dropdown
 				title="climbing type"
@@ -46,6 +46,7 @@
 <script>
 import Dropdown from '../Dropdown/Dropdown';
 import TextInput from '../TextInput/TextInput';
+import { mapGetters } from 'vuex';
 
 export default {
 	components: { Dropdown, TextInput },
@@ -54,11 +55,11 @@ export default {
 			type: Number,
 			required: true
 		},
-		grades: {
-			type: Array,
+		sessionType: {
+			type: String,
 			required: true
 		},
-		climbPerformances: {
+		grades: {
 			type: Array,
 			required: true
 		}
@@ -66,11 +67,12 @@ export default {
 	data: function() {
 		return {
 			routeName: '',
-			climbType: this.climbPerformances[0].name || undefined,
-			climbGrade: this.grades[0].grade_name
+			climbGrade: this.grades[0].grade_name,
+			performance: 'Onsight'
 		};
 	},
 	computed: {
+		...mapGetters (['getClimbPerformances']),
 		selectedGradeIndex: function() {
 			return this.gradeResolver.indexOf(this.climbGrade);
 		},
@@ -86,14 +88,14 @@ export default {
 		performanceResolver: function() {
 			let result = [];
 
-			for (let i=0; i < this.climbPerformances.length; i++){
-				result.push(this.climbPerformances[i].name);
+			for (let i = 0; i < this.getClimbPerformances.length; i++){
+				result.push(this.getClimbPerformances[i].name);
 			}
 
 			return result;
 		},
 		iconResolver: function() {
-			switch (this.climbType) {
+			switch (this.performance) {
 			case 'Onsight':
 				return 'far fa-eye';
 			case 'Flash':
@@ -124,18 +126,21 @@ export default {
 			}
 		},
 		climbTypeID: function() {
-			return this.performanceResolver.indexOf(this.climbType);
+			return this.performanceResolver.indexOf(this.performance);
+		},
+		climbGradeId: function() {
+			return this.grades[this.selectedGradeIndex].id;
 		}
 	},
 	watch: {
 		routeName: function() {
 			this.$emit('routeNameUpdated', [this.climbID, this.routeName]);
 		},
-		climbType: function() {
+		performance: function() {
 			this.$emit('climbTypeUpdated', [this.climbID, this.climbTypeID]);
 		},
 		climbGrade: function() {
-			this.$emit('climbGradeUpdated', [this.climbID, this.selectedGradeIndex]);
+			this.$emit('climbGradeUpdated', [this.climbID, this.climbGradeId]);
 		}
 	}
 };
