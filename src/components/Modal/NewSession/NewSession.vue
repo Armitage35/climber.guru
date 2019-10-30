@@ -124,10 +124,7 @@ export default {
 		updateClimbType(event) {
 			this.session.type = event[1];
 			this.climbs = [];
-		},
-		// climbGradeIDResolver(grade){
-		// 	return this.availableGrades[grade].id;
-		// }
+		}
 	}
 };
 </script>
