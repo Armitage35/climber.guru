@@ -1,17 +1,14 @@
 <template>
-	<div class="modal__mask" @keydown.esc="$emit('toggleModal')" tabindex="0">
+	<div class="modal__mask" @keydown.esc="toggleModal" tabindex="0">
 		<div class="modal">
 			<div class="modal__header">
 				<div class="modal__title">
 					<h1>{{ title }}</h1>
-					<i class="fas fa-times" @click="$emit('toggleModal')"></i>
+					<i class="fas fa-times" @click="toggleModal"></i>
 				</div>
 			</div>
 			<NewSession
 				:actions="actions"
-				:userPreferences="userPreferences"
-				:climbPerformances="climbPerformances"
-				@toggleModal="$emit('toggleModal')"
 			></NewSession>
 		</div>
 	</div>
@@ -19,9 +16,10 @@
 
 <script>
 import NewSession from './NewSession/NewSession';
+import { mapMutations } from 'vuex';
 
 export default {
-	props: ['title', 'climbPerformances', 'userPreferences'],
+	props: ['title'],
 	components: { NewSession },
 	data: function() {
 		return {
@@ -32,6 +30,9 @@ export default {
 				}
 			]
 		};
+	},
+	methods: {
+		...mapMutations(['toggleModal'])
 	}
 };
 </script>

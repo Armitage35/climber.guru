@@ -14,14 +14,14 @@ plugins:
   - vue
 rules:
   indent:
-    - error
+    - warn
     - tab
   linebreak-style:
     - error
     - unix
   quotes:
-    - error
-    - double
+    - warn
+    - single
   semi:
-    - error
+    - warn
     - always

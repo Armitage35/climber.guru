@@ -50,50 +50,48 @@
 .climbCard {
 	@extend %climbCard;
 	@include transform(solid);
+
+	&--new {
+		@extend %climbCard;
+		@include transform(dashed);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
 }
 
-.climbCard--new {
-	@extend %climbCard;
-	@include transform(dashed);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-}
-
-.climbCard__icon--green {
+.climbCard__icon {
 	@extend %icon;
-	background-color: $green;
-}
 
-.climbCard__icon--blue {
-	@extend %icon;
-	background-color: $blue;
-}
-
-.climbCard__icon--purple {
-	@extend %icon;
-	background-color: $romeo-purple;
-}
-
-.climbCard__icon--orange {
-	@extend %icon;
-	background-color: $orange;
-}
-
-.climbCard__icon--red {
-	@extend %icon;
-	background-color: $red;
-}
-
-.climbCard__icon--black {
-	@extend %icon;
-	background-color: $black;
-}
-
-.climbCard__icon--new {
-	@extend %icon;
-	background-color: $dark-blue;
+	&--green {
+		@extend %icon;
+		background-color: $green;
+	}
+	&--blue {
+		@extend %icon;
+		background-color: $green;
+	}
+	&--purple {
+		@extend %icon;
+		background-color: $romeo-purple;
+	}
+	&--orange {
+		@extend %icon;
+		background-color: $orange;
+	}
+	&--red {
+		@extend %icon;
+		background-color: $red;
+	}
+	&--black {
+		@extend %icon;
+		background-color: $black;
+	}
+	&--new {
+		@extend %icon;
+		background-color: $dark-blue;
+	}
 }
 
 .climbCard__dropdowns {

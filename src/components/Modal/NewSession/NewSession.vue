@@ -25,8 +25,8 @@
 					:key="index"
 					:climbID="index"
 					:climb="climb"
+					:sessionType="session.type"
 					:grades="availableGrades"
-					:climbPerformances="climbPerformances"
 					@removeClimb="climbs.splice($event, 1)"
 					@routeNameUpdated="climbs[$event[0]].routeName = $event[1]"
 					@climbTypeUpdated="climbs[$event[0]].type = $event[1]"
@@ -58,10 +58,12 @@ import EmptyClimbCard from '../../ClimbCard/EmptyClimbCard';
 
 // Importing external modules
 import iziToast from 'izitoast';
+import { mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
 	components: { Button, ClimbCard, Dropdown, EmptyClimbCard },
-	props: ['actions', 'userPreferences', 'climbPerformances'],
+	props: ['actions'],
 	data: function() {
 		return {
 			climbTypes: ['bouldering', 'route'],
@@ -69,23 +71,25 @@ export default {
 				date: '',
 				type: 'Bouldering',
 			},
-			climbs: []
+			climbs: [{}]
 		};
 	},
 	computed: {
+		...mapGetters (['getUserID', 'getBoulderingGrades', 'getRouteGrades']),
 		availableGrades: function() {
 			if (this.session.type === 'Bouldering' || this.session.type === ' bouldering ') {
-				return this.userPreferences.grades.boulderGrades;
+				return this.getBoulderingGrades;
 			} else {
-				return this.userPreferences.grades.routeGrades;
+				return this.getRouteGrades;
 			}
 		}
 	},
 	methods: {
+		...mapMutations(['toggleModal']),
 		uploadSession: function() {
 			let finalSession = {
 				climbs: this.climbs,
-				userID: this.userPreferences.details.id,
+				userID: this.getUserID,
 				date: document.getElementById('sessionDate').value,
 			};
 
@@ -97,7 +101,7 @@ export default {
 							message: 'Congratulations!',
 							position: 'topRight'
 						});
-						this.$emit('toggleModal');
+						this.toggleModal();
 						return response;
 					},
 					error => {
@@ -120,9 +124,6 @@ export default {
 		updateClimbType(event) {
 			this.session.type = event[1];
 			this.climbs = [];
-		},
-		climbGradeIDResolver(grade){
-			return this.availableGrades[grade].id;
 		}
 	}
 };
